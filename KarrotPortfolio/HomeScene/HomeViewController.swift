@@ -13,9 +13,10 @@
 import UIKit
 import FlexLayout
 import PinLayout
+import KarrotListKit
 
 protocol HomeDisplayLogic: AnyObject {
-    func displaySomething(viewModel: Home.Something.ViewModel)
+    func displayItemList(_ list: [Home.ItemList.ViewModel])
 }
 
 class HomeViewController: UIViewController, HomeDisplayLogic {
@@ -62,12 +63,27 @@ class HomeViewController: UIViewController, HomeDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
         self.setupViews()
     }
     
     // MARK: Do something
     private let homeHeaderViewController = HomeHeaderViewController()
+    
+    private let configuration = CollectionViewAdapterConfiguration()
+    private let layoutAdapter = CollectionViewLayoutAdapter()
+    
+    private lazy var collectionViewAdapter = CollectionViewAdapter(
+        configuration: configuration,
+        collectionView: collectionView,
+        layoutAdapter: layoutAdapter
+    )
+    
+    private lazy var collectionView = UICollectionView(
+      frame: .zero,
+      collectionViewLayout: UICollectionViewCompositionalLayout(
+        sectionProvider: layoutAdapter.sectionLayout
+      )
+    )
     
     private func setupViews() {
         self.navigationController?.isNavigationBarHidden = true
@@ -76,11 +92,15 @@ class HomeViewController: UIViewController, HomeDisplayLogic {
         if let headerView = homeHeaderViewController.view {
             self.view.addSubview(headerView)
             self.view.flex.define { flex in
-                flex.justifyContent(.start)
-                flex.alignItems(.center)
+                flex.direction(.column)
+                    .justifyContent(.start)
+                    .alignItems(.center)
                 flex.addItem(headerView)
                     .width(100%)
                     .height(70)
+                flex.addItem(collectionView)
+                    .width(100%)
+                    .grow(1)
             }
         }
         self.homeHeaderViewController.didMove(toParent: self)
@@ -90,14 +110,15 @@ class HomeViewController: UIViewController, HomeDisplayLogic {
         super.viewDidLayoutSubviews()
         self.view.flex.layout()
         self.homeHeaderViewController.view.pin.top(self.view.safeAreaInsets.top)
+        self.collectionView.pin.below(of: self.homeHeaderViewController.view)
+            .bottom(view.safeAreaInsets.bottom)
     }
     
-    func doSomething() {
-        let request = Home.Something.Request()
-        interactor?.doSomething(request: request)
+    func fetchItemList() {
+        //TODO: interactor에게 중고 물품 리스트 요청
     }
     
-    func displaySomething(viewModel: Home.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    func displayItemList(_ list: [Home.ItemList.ViewModel]) {
+        //TODO: 화면에 표시
     }
 }

@@ -13,7 +13,7 @@
 import UIKit
 
 protocol HomeBusinessLogic {
-    func doSomething(request: Home.Something.Request)
+    func fetchItemList()
 }
 
 protocol HomeDataStore {
@@ -23,15 +23,9 @@ protocol HomeDataStore {
 class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     var presenter: HomePresentationLogic?
     var worker: HomeWorker?
-    //var name: String = ""
     
-    // MARK: Do something
-    
-    func doSomething(request: Home.Something.Request) {
-        worker = HomeWorker()
-        worker?.doSomeWork()
-        
-        let response = Home.Something.Response()
-        presenter?.presentSomething(response: response)
+    func fetchItemList() {
+        //TODO: worker에게 아이템 리스트 요청 -> 반환
+        //TODO: presenter에게 응답 값 전달
     }
 }

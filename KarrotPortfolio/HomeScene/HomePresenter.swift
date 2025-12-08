@@ -13,16 +13,13 @@
 import UIKit
 
 protocol HomePresentationLogic {
-    func presentSomething(response: Home.Something.Response)
+    func displayItemList(viewModel: [Home.ItemList.ViewModel])
 }
 
 class HomePresenter: HomePresentationLogic {
     weak var viewController: HomeDisplayLogic?
     
-    // MARK: Do something
-    
-    func presentSomething(response: Home.Something.Response) {
-        let viewModel = Home.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func displayItemList(viewModel: [Home.ItemList.ViewModel]) {
+        //TODO: viewController에 아이템 리스트 그리라고 요청
     }
 }
