@@ -14,7 +14,8 @@ import UIKit
 import RxSwift
 
 protocol HomeBusinessLogic {
-    func fetchItemList()
+    func fetchFirstItemList()
+    func fetchNextItemList()
 }
 
 protocol HomeDataStore {
@@ -25,32 +26,39 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     var presenter: HomePresentationLogic?
     var worker: HomeWorkerManagable?
     
-    private var myPlaceList: [String] = ["서원동", "개포3동"]
-    private var myPlaceSelectedIndex: Int = 0
-    private var itemPageIndex: Int = 0
-    private var disposeBag = DisposeBag()
+    private var myPlaceList: [String]
+    private var myPlaceSelectedIndex: Int
+    private var itemPageIndex: Int
+    private var disposeBag: DisposeBag
     
-    func fetchItemList() {
+    init() {
+        worker = HomeworkerStub()
+        myPlaceList = ["서원동", "개포3동"]
+        myPlaceSelectedIndex = 0
+        itemPageIndex = 0
+        disposeBag = DisposeBag()
+    }
+    
+    func fetchFirstItemList() {
+        itemPageIndex = 0
+        fetchItemList()
+    }
+    
+    func fetchNextItemList() {
+        itemPageIndex += 1
+        fetchItemList()
+    }
+    
+    private func fetchItemList() {
         worker?.fetchItemList(
             requestModel: .init(place: myPlaceList[myPlaceSelectedIndex], pageIndex: itemPageIndex)
         )
         .observe(on: MainScheduler.instance)
-        .subscribe { response in
-            let viewModels = response.data.items.map {
-                Home.ItemList.ViewModel.init(
-                    type: $0.type,
-                    title: $0.title,
-                    price: $0.price,
-                    location: $0.location,
-                    distance: $0.distance,
-                    registDate: $0.registDate,
-                    imageURL: $0.imageURL,
-                    likes: $0.likes
-                )
-            }
-            self.presenter?.displayItemList(viewModel: viewModels)
+        .subscribe { [weak self] response in
+            let items = response.data.items
+            self?.presenter?.displayItemList(viewModel: items)
         } onError: { error in
-            //TODO: presenter에게 응답 값 전달, 에러 화면 표시
+            print(error)
         }.disposed(by: disposeBag)
     }
 }

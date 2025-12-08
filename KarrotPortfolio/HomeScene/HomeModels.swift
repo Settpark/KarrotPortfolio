@@ -10,8 +10,7 @@
 //  see http://clean-swift.com
 //
 
-import Foundation
-import CoreLocation
+import UIKit
 
 enum Home {
     enum ItemList {
@@ -45,7 +44,7 @@ enum Home {
                     var location: String
                     var distance: Double
                     var registDate: Int //MARK: UNIX Time
-                    var imageURL: String
+                    var imageUrl: String
                     var likes: Int
                     var chatNum: Int? //MARK: 중고거래일 경우
                     var applicantNum: Int? //MARK: 알바 지원인 경우
@@ -59,29 +58,32 @@ enum Home {
             }
         }
         
-        struct ViewModel{
+        struct ViewModel: Hashable {
+            var id: UUID
             var type: String
             var title: String
             var price: Int
             var location: String
-            var distance: Double
+            var distance: Double?
             var registDate: Int //MARK: UNIX Time
-            var imageURL: String
+            var imageURL: UIImage
             var likes: Int
             var chatNum: Int? //MARK: 중고거래일 경우
             var applicantNum: Int?
             
-            init(type: Home.ItemList.Response.Data.SellingType,
+            init(id: UUID = UUID(),
+                 type: Home.ItemList.Response.Data.SellingType,
                  title: String,
                  price: Int,
                  location: String,
-                 distance: Double,
+                 distance: Double?,
                  registDate: Int,
-                 imageURL: String,
+                 imageURL: UIImage,
                  likes: Int,
                  chatNum: Int? = nil,
                  applicantNum: Int? = nil
             ) {
+                self.id = id
                 self.type = type == .job ? "알바" : type == .advertise ? "광고" : ""
                 self.title = title
                 self.price = price

@@ -13,13 +13,13 @@
 import UIKit
 
 protocol HomePresentationLogic {
-    func displayItemList(viewModel: [Home.ItemList.ViewModel])
+    func displayItemList(viewModel: [Home.ItemList.Response.Data.Item])
 }
 
 class HomePresenter: HomePresentationLogic {
     weak var viewController: HomeDisplayLogic?
     
-    func displayItemList(viewModel: [Home.ItemList.ViewModel]) {
-        //TODO: viewController에 아이템 리스트 그리라고 요청
+    func displayItemList(viewModel: [Home.ItemList.Response.Data.Item]) {
+        //TODO: ViewModel로 전환, 이미지 url에서 UIImage로 변경
     }
 }

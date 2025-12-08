@@ -23,6 +23,9 @@ class HomeViewController: UIViewController, HomeDisplayLogic {
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
     
+    private let homeHeaderViewController = HomeHeaderViewController()
+    private let homeItemListView: HomeItemListView = HomeItemListView()
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -63,62 +66,52 @@ class HomeViewController: UIViewController, HomeDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupViews()
+        setupViews()
+        homeItemListView.setDelegate(self)
     }
     
     // MARK: Do something
-    private let homeHeaderViewController = HomeHeaderViewController()
-    
-    private let configuration = CollectionViewAdapterConfiguration()
-    private let layoutAdapter = CollectionViewLayoutAdapter()
-    
-    private lazy var collectionViewAdapter = CollectionViewAdapter(
-        configuration: configuration,
-        collectionView: collectionView,
-        layoutAdapter: layoutAdapter
-    )
-    
-    private lazy var collectionView = UICollectionView(
-      frame: .zero,
-      collectionViewLayout: UICollectionViewCompositionalLayout(
-        sectionProvider: layoutAdapter.sectionLayout
-      )
-    )
     
     private func setupViews() {
-        self.navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         
-        self.addChild(homeHeaderViewController)
+        addChild(homeHeaderViewController)
         if let headerView = homeHeaderViewController.view {
-            self.view.addSubview(headerView)
-            self.view.flex.define { flex in
+            view.addSubview(headerView)
+            view.flex.define { flex in
                 flex.direction(.column)
                     .justifyContent(.start)
                     .alignItems(.center)
                 flex.addItem(headerView)
                     .width(100%)
                     .height(70)
-                flex.addItem(collectionView)
+                flex.addItem(homeItemListView)
                     .width(100%)
                     .grow(1)
             }
         }
-        self.homeHeaderViewController.didMove(toParent: self)
+        homeHeaderViewController.didMove(toParent: self)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.flex.layout()
-        self.homeHeaderViewController.view.pin.top(self.view.safeAreaInsets.top)
-        self.collectionView.pin.below(of: self.homeHeaderViewController.view)
+        view.flex.layout()
+        homeHeaderViewController.view.pin.top(self.view.safeAreaInsets.top)
+        homeItemListView.pin.below(of: self.homeHeaderViewController.view)
             .bottom(view.safeAreaInsets.bottom)
     }
     
-    func fetchItemList() {
-        //TODO: interactor에게 중고 물품 리스트 요청
+    func displayItemList(_ list: [Home.ItemList.ViewModel]) {
+        homeItemListView.updateViewModels(list)
+    }
+}
+
+extension HomeViewController: HomeItemListViewDelegate {
+    func resetViewModels() {
+        interactor?.fetchFirstItemList()
     }
     
-    func displayItemList(_ list: [Home.ItemList.ViewModel]) {
-        //TODO: 화면에 표시
+    func appendViewModels() {
+        interactor?.fetchNextItemList()
     }
 }

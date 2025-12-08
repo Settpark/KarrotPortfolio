@@ -60,8 +60,31 @@ class HomeWorker: HomeWorkerManagable {
 
 //MARK: open API가 없으니까, 로컬에서 테스트
 class HomeworkerStub: HomeWorkerManagable {
+    enum FileError: Error {
+        case fileNotFound
+    }
+    
     func fetchItemList(requestModel: Home.ItemList.Request) -> Observable<Home.ItemList.Response> {
         //TODO: 네트워크 response 모델이 없으므로, 로컬에 데이터 저장 후 반환
-        return Observable.empty()
+        
+        return Observable.create { observer in
+            do {
+                guard let url = Bundle.main.url(forResource: "stubData", withExtension: "json") else {
+                    observer.onError(FileError.fileNotFound)
+                    return Disposables.create()
+                }
+                let data = try Data(contentsOf: url)
+                
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let model = try decoder.decode(Home.ItemList.Response.self, from: data)
+                
+                observer.onNext(model)
+                observer.onCompleted()
+            } catch {
+                observer.onError(error)
+            }
+            return Disposables.create()
+        }
     }
 }
