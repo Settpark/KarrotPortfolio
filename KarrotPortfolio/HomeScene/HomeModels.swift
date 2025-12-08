@@ -10,17 +10,89 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
+import Foundation
+import CoreLocation
 
 enum Home {
-    // MARK: Use cases
-    
     enum ItemList {
-        struct Request {
+        struct Request: Encodable {
+            var place: String
+            var pageIndex: Int
+            //TODO: 서버에서 거리 계산해주면 보내고
+//            var currentLocation: CLLocationCoordinate2D?
+            
+            init(place: String, pageIndex: Int) {
+                self.place = place
+                self.pageIndex = pageIndex
+            }
         }
-        struct Response {
+        struct Response: Decodable {
+            
+            var status: String
+            var data: Home.ItemList.Response.Data
+            
+            enum ResponseError: Error {
+                case invalidURL
+            }
+            
+            struct Data: Decodable {
+                var items: [Home.ItemList.Response.Data.Item]
+                
+                struct Item: Decodable {
+                    var type: SellingType
+                    var title: String
+                    var price: Int
+                    var location: String
+                    var distance: Double
+                    var registDate: Int //MARK: UNIX Time
+                    var imageURL: String
+                    var likes: Int
+                    var chatNum: Int? //MARK: 중고거래일 경우
+                    var applicantNum: Int? //MARK: 알바 지원인 경우
+                }
+                
+                enum SellingType: String, Decodable {
+                    case sale = "sale"
+                    case job = "job"
+                    case advertise = "advertise"
+                }
+            }
         }
+        
         struct ViewModel{
+            var type: String
+            var title: String
+            var price: Int
+            var location: String
+            var distance: Double
+            var registDate: Int //MARK: UNIX Time
+            var imageURL: String
+            var likes: Int
+            var chatNum: Int? //MARK: 중고거래일 경우
+            var applicantNum: Int?
+            
+            init(type: Home.ItemList.Response.Data.SellingType,
+                 title: String,
+                 price: Int,
+                 location: String,
+                 distance: Double,
+                 registDate: Int,
+                 imageURL: String,
+                 likes: Int,
+                 chatNum: Int? = nil,
+                 applicantNum: Int? = nil
+            ) {
+                self.type = type == .job ? "알바" : type == .advertise ? "광고" : ""
+                self.title = title
+                self.price = price
+                self.location = location
+                self.distance = distance
+                self.registDate = registDate
+                self.imageURL = imageURL
+                self.likes = likes
+                self.chatNum = chatNum
+                self.applicantNum = applicantNum
+            }
         }
     }
 }

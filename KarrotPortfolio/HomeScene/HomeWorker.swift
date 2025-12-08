@@ -10,9 +10,58 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
+import Foundation
+import RxSwift
 
-class HomeWorker {
-    func doSomeWork() {
+//MARK: 공통 모듈에 옮기면 더 좋지만...
+protocol DecoderType {
+    func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T
+}
+extension JSONDecoder: DecoderType {}
+
+protocol HomeWorkerManagable: AnyObject {
+    func fetchItemList(requestModel: Home.ItemList.Request) -> Observable<Home.ItemList.Response>
+}
+
+class HomeWorker: HomeWorkerManagable {
+    private let decoder: DecoderType
+    
+    init(decoder: DecoderType = JSONDecoder()) {
+        self.decoder = decoder
+        if let jsondecoder = decoder as? JSONDecoder {
+            jsondecoder.keyDecodingStrategy = .convertFromSnakeCase
+        }
+    }
+    
+    func createURL(place: String, pageIndex: Int) -> URL? {
+        guard var components = URLComponents(string: ServiceTarget.serviceTarget + "/item") else {
+            return nil
+        }
+        components.queryItems = [
+            URLQueryItem(name: "place", value: place),
+            URLQueryItem(name: "page", value: String(pageIndex))
+        ]
+        return components.url
+    }
+    
+    func fetchItemList(requestModel: Home.ItemList.Request) -> Observable<Home.ItemList.Response> {
+        guard let url: URL = self.createURL(
+            place: requestModel.place, pageIndex: requestModel.pageIndex
+        ) else {
+            return Observable.error(Home.ItemList.Response.ResponseError.invalidURL)
+        }
+        let request: URLRequest = URLRequest(url: url)
+        return URLSession.shared.rx.data(request: request)
+            .map {
+                return try self.decoder.decode(Home.ItemList.Response.self, from: $0)
+            }
+    }
+}
+
+//MARK: open API가 없으니까, 로컬에서 테스트
+class HomeworkerStub: HomeWorkerManagable {
+    func fetchItemList(requestModel: Home.ItemList.Request) -> Observable<Home.ItemList.Response> {
+        //TODO: 네트워크 response 모델이 없으므로, 로컬에 데이터 저장 후 반환
+        return Observable.empty()
     }
 }
