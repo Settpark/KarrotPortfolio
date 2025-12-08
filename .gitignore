@@ -98,10 +98,10 @@ xcuserdata
 ### Xcode Patch ###
 # *.xcodeproj/*
 # !*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcodeproj/project.xcworkspace/
-!*.xcworkspace/contents.xcworkspacedata
-/*.gcno
-**/xcshareddata/WorkspaceSettings.xcsettings
+# !*.xcodeproj/xcshareddata/
+# !*.xcodeproj/project.xcworkspace/
+# !*.xcworkspace/contents.xcworkspacedata
+# /*.gcno
+# **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,swiftpackagemanager
