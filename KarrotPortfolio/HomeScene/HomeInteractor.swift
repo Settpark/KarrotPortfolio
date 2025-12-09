@@ -56,7 +56,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
         .observe(on: MainScheduler.instance)
         .subscribe { [weak self] response in
             let items = response.data.items
-            self?.presenter?.displayItemList(viewModel: items)
+            self?.presenter?.displayItemList(items)
         } onError: { error in
             print(error)
         }.disposed(by: disposeBag)

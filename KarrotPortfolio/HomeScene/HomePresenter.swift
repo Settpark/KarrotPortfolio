@@ -11,15 +11,47 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol HomePresentationLogic {
-    func displayItemList(viewModel: [Home.ItemList.Response.Data.Item])
+    func displayItemList(_ items: [Home.ItemList.Response.Data.Item])
 }
 
 class HomePresenter: HomePresentationLogic {
     weak var viewController: HomeDisplayLogic?
+    private let disposeBag: DisposeBag = .init()
     
-    func displayItemList(viewModel: [Home.ItemList.Response.Data.Item]) {
-        //TODO: ViewModel로 전환, 이미지 url에서 UIImage로 변경
+    func displayItemList(_ items: [Home.ItemList.Response.Data.Item]) {
+        let imageLoader = ImageLoadManagerStub()
+        
+        var viewModels: [Home.ItemList.ViewModel] = []
+        
+        for item in items {
+            let imageObserver = imageLoader.loadImage(url: item.imageUrl)
+                .flatMap({ optionalImage -> Observable<UIImage> in
+                    guard let image = optionalImage else {
+                        return Observable.error(ImageLoadManagerStub.ErrorCase.invalidData)
+                    }
+                    return Observable.just(image)
+                })
+                .debug()
+                .catchAndReturn(UIImage(named: "loadFailImage")!)
+                .share(replay: 1, scope: .forever)
+            
+            let viewModel = Home.ItemList.ViewModel(
+                type: item.type,
+                title: item.title,
+                price: item.price,
+                location: item.location,
+                distance: item.distance,
+                registDate: item.registDate,
+                image: imageObserver,
+                likes: item.likes,
+                chatNum: item.chatNum,
+                applicantNum: item.applicantNum
+            )
+            viewModels.append(viewModel)
+        }
+        viewController?.displayItemList(viewModels)
     }
 }

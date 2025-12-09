@@ -74,10 +74,16 @@ class HomeworkerStub: HomeWorkerManagable {
                     return Disposables.create()
                 }
                 let data = try Data(contentsOf: url)
+                guard let rawString = String(data: data, encoding: .utf8) else {
+                    fatalError("encoding error")
+                }
+
+                let fixedString = rawString.replacingOccurrences(of: "\u{00A0}", with: " ")
+                let fixedData = fixedString.data(using: .utf8)!
                 
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let model = try decoder.decode(Home.ItemList.Response.self, from: data)
+                let model = try decoder.decode(Home.ItemList.Response.self, from: fixedData)
                 
                 observer.onNext(model)
                 observer.onCompleted()

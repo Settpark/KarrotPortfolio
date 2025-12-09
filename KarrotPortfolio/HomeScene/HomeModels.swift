@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import RxSwift
 
 enum Home {
     enum ItemList {
@@ -58,7 +59,11 @@ enum Home {
             }
         }
         
-        struct ViewModel: Hashable {
+        struct ViewModel: Equatable {
+            static func == (lhs: Home.ItemList.ViewModel, rhs: Home.ItemList.ViewModel) -> Bool {
+                return lhs.id == rhs.id
+            }
+            
             var id: UUID
             var type: String
             var title: String
@@ -66,7 +71,7 @@ enum Home {
             var location: String
             var distance: Double?
             var registDate: Int //MARK: UNIX Time
-            var imageURL: UIImage
+            var image: Observable<UIImage>
             var likes: Int
             var chatNum: Int? //MARK: 중고거래일 경우
             var applicantNum: Int?
@@ -78,7 +83,7 @@ enum Home {
                  location: String,
                  distance: Double?,
                  registDate: Int,
-                 imageURL: UIImage,
+                 image: Observable<UIImage>,
                  likes: Int,
                  chatNum: Int? = nil,
                  applicantNum: Int? = nil
@@ -90,7 +95,7 @@ enum Home {
                 self.location = location
                 self.distance = distance
                 self.registDate = registDate
-                self.imageURL = imageURL
+                self.image = image
                 self.likes = likes
                 self.chatNum = chatNum
                 self.applicantNum = applicantNum
