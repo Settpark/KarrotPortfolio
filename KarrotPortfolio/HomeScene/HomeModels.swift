@@ -44,7 +44,7 @@ enum Home {
                     var price: Int
                     var location: String
                     var distance: Double
-                    var registDate: Int //MARK: UNIX Time
+                    var registDate: Double //MARK: UNIX Time
                     var imageUrl: String
                     var likes: Int
                     var chatNum: Int? //MARK: 중고거래일 경우
@@ -70,7 +70,7 @@ enum Home {
             var price: Int
             var location: String
             var distance: Double?
-            var registDate: Int //MARK: UNIX Time
+            var registDate: String
             var image: Observable<UIImage>
             var likes: Int
             var chatNum: Int? //MARK: 중고거래일 경우
@@ -82,7 +82,7 @@ enum Home {
                  price: Int,
                  location: String,
                  distance: Double?,
-                 registDate: Int,
+                 registDate: String,
                  image: Observable<UIImage>,
                  likes: Int,
                  chatNum: Int? = nil,

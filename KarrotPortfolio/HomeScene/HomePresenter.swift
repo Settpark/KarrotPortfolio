@@ -34,7 +34,6 @@ class HomePresenter: HomePresentationLogic {
                     }
                     return Observable.just(image)
                 })
-                .debug()
                 .catchAndReturn(UIImage(named: "loadFailImage")!)
                 .share(replay: 1, scope: .forever)
             
@@ -44,7 +43,7 @@ class HomePresenter: HomePresentationLogic {
                 price: item.price,
                 location: item.location,
                 distance: item.distance,
-                registDate: item.registDate,
+                registDate: timeAgoString(fromUnixTime: item.registDate),
                 image: imageObserver,
                 likes: item.likes,
                 chatNum: item.chatNum,
@@ -53,5 +52,29 @@ class HomePresenter: HomePresentationLogic {
             viewModels.append(viewModel)
         }
         viewController?.displayItemList(viewModels)
+    }
+    
+    func timeAgoString(fromUnixTime unixTime: TimeInterval) -> String {
+        let currentTime = Date().timeIntervalSince1970
+        let timeDifference = abs(currentTime - unixTime)
+        
+        let second: TimeInterval = 1
+        let minute: TimeInterval = 60 * second
+        let hour: TimeInterval = 60 * minute
+        let day: TimeInterval = 24 * hour
+        
+        if timeDifference < minute {
+            let seconds = Int(timeDifference)
+            return "\(seconds)초 전"
+        } else if timeDifference < hour {
+            let minutes = Int(timeDifference / minute)
+            return "\(minutes)분 전"
+        } else if timeDifference < day {
+            let hours = Int(timeDifference / hour)
+            return "\(hours)시간 전"
+        } else {
+            let days = Int(timeDifference / day)
+            return "\(days)일 전"
+        }
     }
 }

@@ -53,6 +53,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
         worker?.fetchItemList(
             requestModel: .init(place: myPlaceList[myPlaceSelectedIndex], pageIndex: itemPageIndex)
         )
+        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
         .observe(on: MainScheduler.instance)
         .subscribe { [weak self] response in
             let items = response.data.items

@@ -2,13 +2,13 @@
   "status": "success",
   "data": {
     "items": [
-      { "type": "sale", "title": "닌텐도 스위치 OLED 팝니다", "price": 380000, "location": "봉천동", "distance": 2.1, "regist_date": 1733604000, "image_url": "image_1", "likes": 15, "chat_num": 5, "applicant_num": null },
-      { "type": "job", "title": "주말 카페 아르바이트 급구", "price": 11000, "location": "신림동", "distance": 0.5, "regist_date": 1733596800, "image_url": "image_2", "likes": 8, "chat_num": null, "applicant_num": 12 },
-      { "type": "advertise", "title": "새해 맞이 헬스장 3개월 할인!", "price": 300000, "location": "역삼역", "distance": 0.0, "regist_date": 1733589600, "image_url": "image_3", "likes": 0, "chat_num": null, "applicant_num": null },
+      { "type": "sale", "title": "닌텐도 스위치 OLED 팝니다", "price": 380000, "location": "봉천동", "distance": 2.1, "regist_date": 1765270565, "image_url": "image_1", "likes": 15, "chat_num": 5, "applicant_num": null },
+      { "type": "job", "title": "주말 카페 아르바이트 급구", "price": 11000, "location": "신림동", "distance": 0.5, "regist_date": 1765270566, "image_url": "image_2", "likes": 8, "chat_num": null, "applicant_num": 12 },
+      { "type": "advertise", "title": "새해 맞이 헬스장 3개월 할인!", "price": 300000, "location": "역삼역", "distance": 0.0, "regist_date": 1765270567, "image_url": "image_3", "likes": 0, "chat_num": null, "applicant_num": null },
       { "type": "sale", "title": "아이폰 13 미니 (블루)", "price": 550000, "location": "신대방동", "distance": 1.2, "regist_date": 1733582400, "image_url": "image_4", "likes": 22, "chat_num": 7, "applicant_num": null },
       { "type": "job", "title": "재택 웹디자이너 프리랜서 모집", "price": 30000, "location": "온라인", "distance": 0.0, "regist_date": 1733575200, "image_url": "image_5", "likes": 18, "chat_num": null, "applicant_num": 35 },
       { "type": "sale", "title": "새 학기용 책상 및 의자 세트", "price": 120000, "location": "낙성대동", "distance": 3.4, "regist_date": 1733568000, "image_url": "image_6", "likes": 5, "chat_num": 1, "applicant_num": null },
-      { "type": "advertise", "title": "전기차 무료 시승 이벤트", "price": 0, "location": "강남 전시장", "distance": 6.8, "regist_date": 1733560800, "image_url": "image_7", "likes": 1, "chat_num": null, "applicant_num": null },
+      { "type": "advertise", "title": "전기차 무료 시승 이벤트", "price": 0, "location": "강남 전시장", "distance": 6.8, "regist_date": 1733560800, "image_url": "image_365", "likes": 1, "chat_num": null, "applicant_num": null },
       { "type": "sale", "title": "나이키 한정판 운동화 270mm", "price": 180000, "location": "구로디지털단지", "distance": 4.5, "regist_date": 1733553600, "image_url": "image_8", "likes": 40, "chat_num": 10, "applicant_num": null },
       { "type": "job", "title": "고등학교 수학 과외 선생님", "price": 25000, "location": "관악구청 근처", "distance": 1.5, "regist_date": 1733546400, "image_url": "image_9", "likes": 11, "chat_num": null, "applicant_num": 8 },
       { "type": "sale", "title": "미개봉 에어팟 프로 2세대", "price": 250000, "location": "사당동", "distance": 5.0, "regist_date": 1733539200, "image_url": "image_10", "likes": 30, "chat_num": 15, "applicant_num": null },

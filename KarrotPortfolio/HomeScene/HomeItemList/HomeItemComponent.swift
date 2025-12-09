@@ -25,6 +25,6 @@ struct HomeItemComponent: Component {
     }
     
     var layoutMode: KarrotListKit.ContentLayoutMode {
-        .flexibleHeight(estimatedHeight: 180.0)
+        .flexibleHeight(estimatedHeight: 135)
     }
 }

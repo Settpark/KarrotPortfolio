@@ -4,7 +4,7 @@ cd picsum_3024x4032
 
 # 1부터 50까지 반복하며 이미지 다운로드
 for i in {1..50}; do
-  URL="https://picsum.photos/id/$i/3024/4032"
+  URL="https://picsum.photos/id/$i/270/360"
   FILE_NAME="image_$i.jpg"
   
   echo "Downloading $FILE_NAME (ID: $i)..."

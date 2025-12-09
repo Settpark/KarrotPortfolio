@@ -83,9 +83,9 @@ final class HomeItemListView: UIView {
                 }
                 .withSectionLayout(.vertical)
             }.onRefresh{ [weak self] _ in
-                self?.resetViewModels()
+//                self?.resetViewModels()
             }.onReachEnd(offsetFromEnd: .relativeToContainerSize(multiplier: 1.0)) { [weak self] _ in
-                self?.appendViewModels()
+//                self?.appendViewModels()
             }
         )
     }

@@ -24,17 +24,19 @@ final class HomeItemView: UIView {
     private let rootFlexContainer = UIView()
     private let subFlexContainer = UIView()
     private let subTitleFlexContainer = UIView()
-    private let disposeBag: DisposeBag = .init()
+    private var disposeBag: DisposeBag = .init()
     
     private let thumbnailImage: UIImageView = {
         let imageView: UIImageView = .init()
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         return imageView
     }()
     
     private let titleLabel: UILabel = {
         let label: UILabel = .init()
         label.numberOfLines = 0
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .black
         return label
     }()
@@ -42,32 +44,32 @@ final class HomeItemView: UIView {
     private let distanceLabel: UILabel = {
         let label: UILabel = .init()
         label.numberOfLines = 0
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .systemGray3
         return label
     }()
     
     private let locationLabel: UILabel = {
         let label: UILabel = .init()
         label.numberOfLines = 0
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .systemGray3
         return label
     }()
     
     private let registTimeLabel: UILabel = {
         let label: UILabel = .init()
         label.numberOfLines = 0
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .systemGray3
         return label
     }()
     
     private let typeLabel: UILabel = {
         let label: UILabel = .init()
         label.numberOfLines = 0
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .systemGray3
         return label
     }()
     
@@ -87,12 +89,14 @@ final class HomeItemView: UIView {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex
             .direction(.row)
+            .alignContent(.center)
             .paddingHorizontal(16.0)
             .paddingVertical(8.0)
             .define { flex in
                 flex.addItem(thumbnailImage)
-                    .width(150)
-                    .height(150)
+                    .width(120)
+                    .height(120)
+                    .marginRight(8)
                 
                 flex.addItem(subFlexContainer)
                     .grow(1)
@@ -102,30 +106,42 @@ final class HomeItemView: UIView {
                             .marginBottom(10)
                         subFlex.addItem(subTitleFlexContainer)
                             .direction(.row)
+                            .justifyContent(.start)
                             .define { subTitleFlex in
                                 subTitleFlex.addItem(distanceLabel)
+                                    .marginHorizontal(2.5)
                                 subTitleFlex.addItem(locationLabel)
+                                    .marginHorizontal(2.5)
                                 subTitleFlex.addItem(registTimeLabel)
+                                    .marginHorizontal(2.5)
                                 subTitleFlex.addItem(typeLabel)
+                                    .marginHorizontal(2.5)
                             }
                     }
             }
     }
     
     private func applyViewModel() {
-        viewModel.image.subscribe { [weak self] in
-            self?.thumbnailImage.image = $0
-        }.disposed(by: disposeBag)
+        disposeBag = DisposeBag()
+        thumbnailImage.image = nil
+        
+        //MARK: 사람이 찍는 사진이니까, 고해상도 이미지를 잘라서 사용했다고 생각했는데, 다운샘플링한 저해상도 thumbnail용 이미지 필요함. 고해상도 이미지는 상세보기에서 사용하는게 적절할듯
+        viewModel.image
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] in
+                self?.thumbnailImage.image = $0
+                self?.thumbnailImage.flex.markDirty()
+            }.disposed(by: disposeBag)
 
         titleLabel.text = viewModel.title
         distanceLabel.text = viewModel.distance == nil ?
         "" : viewModel.distance! > 1000 ?
         String(format: "%.1fkm", viewModel.distance! / 1000) : "\(String(describing: viewModel.distance!))m"
         locationLabel.text = viewModel.location
-        registTimeLabel.text = "\(viewModel.registDate)"
+        registTimeLabel.text = viewModel.registDate
         typeLabel.text = viewModel.type
         
-        thumbnailImage.flex.markDirty()
         titleLabel.flex.markDirty()
         distanceLabel.flex.markDirty()
         locationLabel.flex.markDirty()
@@ -133,12 +149,22 @@ final class HomeItemView: UIView {
         typeLabel.flex.markDirty()
         
         distanceLabel.flex.display(viewModel.distance != nil ? .flex : .none)
+        
+        //MARK: 명시적으로 호출하지 않으면 이전에 사용한 뷰와 엉키는 현상이 발생함.
+        self.setNeedsLayout()
+    }
+    
+    //MARK: rootConatiner의 가로 길이를 지정하지 않으면 예상지 못하게 뷰가 이상하게 그려질 수 있음
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        rootFlexContainer.flex.sizeThatFits(
+            size: CGSize(width: size.width, height: .nan)
+        )
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
+        rootFlexContainer.pin.all()
     }
 }
 
