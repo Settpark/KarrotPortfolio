@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ABF3CA0E2EE12277007EF67E /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = ABF3CA0D2EE12277007EF67E /* FlexLayout */; };
+		ABF3CA112EE122A2007EF67E /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = ABF3CA102EE122A2007EF67E /* PinLayout */; };
+		ABF3CA142EE122C9007EF67E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ABF3CA132EE122C9007EF67E /* Alamofire */; };
+		ABF3CA192EE1231A007EF67E /* KarrotListKit in Frameworks */ = {isa = PBXBuildFile; productRef = ABF3CA182EE1231A007EF67E /* KarrotListKit */; };
+		ABF3CB292EE15CC2007EF67E /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = ABF3CB282EE15CC2007EF67E /* RxBlocking */; };
+		ABF3CB2B2EE15CC2007EF67E /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = ABF3CB2A2EE15CC2007EF67E /* RxCocoa */; };
+		ABF3CB2D2EE15CC2007EF67E /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = ABF3CB2C2EE15CC2007EF67E /* RxRelay */; };
+		ABF3CB2F2EE15CC2007EF67E /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ABF3CB2E2EE15CC2007EF67E /* RxSwift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		ABF3C9DF2EE11EE3007EF67E /* KarrotPortfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KarrotPortfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ABF3C9F12EE11EE4007EF67E /* Exceptions for "KarrotPortfolio" folder in "KarrotPortfolio" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ABF3C9DE2EE11EE3007EF67E /* KarrotPortfolio */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		ABF3C9E12EE11EE3007EF67E /* KarrotPortfolio */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ABF3C9F12EE11EE4007EF67E /* Exceptions for "KarrotPortfolio" folder in "KarrotPortfolio" target */,
+			);
+			path = KarrotPortfolio;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABF3C9DC2EE11EE3007EF67E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABF3CB2F2EE15CC2007EF67E /* RxSwift in Frameworks */,
+				ABF3CA192EE1231A007EF67E /* KarrotListKit in Frameworks */,
+				ABF3CB292EE15CC2007EF67E /* RxBlocking in Frameworks */,
+				ABF3CA112EE122A2007EF67E /* PinLayout in Frameworks */,
+				ABF3CB2B2EE15CC2007EF67E /* RxCocoa in Frameworks */,
+				ABF3CA0E2EE12277007EF67E /* FlexLayout in Frameworks */,
+				ABF3CB2D2EE15CC2007EF67E /* RxRelay in Frameworks */,
+				ABF3CA142EE122C9007EF67E /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ABF3C9D62EE11EE2007EF67E = {
+			isa = PBXGroup;
+			children = (
+				ABF3C9E12EE11EE3007EF67E /* KarrotPortfolio */,
+				ABF3C9E02EE11EE3007EF67E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ABF3C9E02EE11EE3007EF67E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABF3C9DF2EE11EE3007EF67E /* KarrotPortfolio.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABF3C9DE2EE11EE3007EF67E /* KarrotPortfolio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABF3C9F22EE11EE4007EF67E /* Build configuration list for PBXNativeTarget "KarrotPortfolio" */;
+			buildPhases = (
+				ABF3C9DB2EE11EE3007EF67E /* Sources */,
+				ABF3C9DC2EE11EE3007EF67E /* Frameworks */,
+				ABF3C9DD2EE11EE3007EF67E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				ABF3C9E12EE11EE3007EF67E /* KarrotPortfolio */,
+			);
+			name = KarrotPortfolio;
+			packageProductDependencies = (
+				ABF3CA0D2EE12277007EF67E /* FlexLayout */,
+				ABF3CA102EE122A2007EF67E /* PinLayout */,
+				ABF3CA132EE122C9007EF67E /* Alamofire */,
+				ABF3CA182EE1231A007EF67E /* KarrotListKit */,
+				ABF3CB282EE15CC2007EF67E /* RxBlocking */,
+				ABF3CB2A2EE15CC2007EF67E /* RxCocoa */,
+				ABF3CB2C2EE15CC2007EF67E /* RxRelay */,
+				ABF3CB2E2EE15CC2007EF67E /* RxSwift */,
+			);
+			productName = KarrotPortfolio;
+			productReference = ABF3C9DF2EE11EE3007EF67E /* KarrotPortfolio.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABF3C9D72EE11EE2007EF67E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					ABF3C9DE2EE11EE3007EF67E = {
+						CreatedOnToolsVersion = 16.4;
+					};
+				};
+			};
+			buildConfigurationList = ABF3C9DA2EE11EE2007EF67E /* Build configuration list for PBXProject "KarrotPortfolio" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABF3C9D62EE11EE2007EF67E;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ABF3CA0C2EE12277007EF67E /* XCRemoteSwiftPackageReference "FlexLayout" */,
+				ABF3CA0F2EE122A2007EF67E /* XCRemoteSwiftPackageReference "PinLayout" */,
+				ABF3CA122EE122C9007EF67E /* XCRemoteSwiftPackageReference "Alamofire" */,
+				ABF3CA172EE1231A007EF67E /* XCRemoteSwiftPackageReference "KarrotListKit" */,
+				ABF3CB272EE15CC2007EF67E /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = ABF3C9E02EE11EE3007EF67E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABF3C9DE2EE11EE3007EF67E /* KarrotPortfolio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABF3C9DD2EE11EE3007EF67E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABF3C9DB2EE11EE3007EF67E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ABF3C9F32EE11EE4007EF67E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TA9B4FGCP9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KarrotPortfolio/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "당근포트폴리오";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pntbiz.KarrotPortfolio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		ABF3C9F42EE11EE4007EF67E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TA9B4FGCP9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KarrotPortfolio/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "당근포트폴리오";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pntbiz.KarrotPortfolio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		ABF3C9F52EE11EE4007EF67E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TA9B4FGCP9;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABF3C9F62EE11EE4007EF67E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = TA9B4FGCP9;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABF3C9DA2EE11EE2007EF67E /* Build configuration list for PBXProject "KarrotPortfolio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABF3C9F52EE11EE4007EF67E /* Debug */,
+				ABF3C9F62EE11EE4007EF67E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABF3C9F22EE11EE4007EF67E /* Build configuration list for PBXNativeTarget "KarrotPortfolio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABF3C9F32EE11EE4007EF67E /* Debug */,
+				ABF3C9F42EE11EE4007EF67E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ABF3CA0C2EE12277007EF67E /* XCRemoteSwiftPackageReference "FlexLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/FlexLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.2;
+			};
+		};
+		ABF3CA0F2EE122A2007EF67E /* XCRemoteSwiftPackageReference "PinLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/PinLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.6;
+			};
+		};
+		ABF3CA122EE122C9007EF67E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		ABF3CA172EE1231A007EF67E /* XCRemoteSwiftPackageReference "KarrotListKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daangn/KarrotListKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.7.0;
+			};
+		};
+		ABF3CB272EE15CC2007EF67E /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ABF3CA0D2EE12277007EF67E /* FlexLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF3CA0C2EE12277007EF67E /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayout;
+		};
+		ABF3CA102EE122A2007EF67E /* PinLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF3CA0F2EE122A2007EF67E /* XCRemoteSwiftPackageReference "PinLayout" */;
+			productName = PinLayout;
+		};
+		ABF3CA132EE122C9007EF67E /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF3CA122EE122C9007EF67E /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		ABF3CA182EE1231A007EF67E /* KarrotListKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF3CA172EE1231A007EF67E /* XCRemoteSwiftPackageReference "KarrotListKit" */;
+			productName = KarrotListKit;
+		};
+		ABF3CB282EE15CC2007EF67E /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF3CB272EE15CC2007EF67E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		ABF3CB2A2EE15CC2007EF67E /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF3CB272EE15CC2007EF67E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		ABF3CB2C2EE15CC2007EF67E /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF3CB272EE15CC2007EF67E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		ABF3CB2E2EE15CC2007EF67E /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABF3CB272EE15CC2007EF67E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = ABF3C9D72EE11EE2007EF67E /* Project object */;
+}

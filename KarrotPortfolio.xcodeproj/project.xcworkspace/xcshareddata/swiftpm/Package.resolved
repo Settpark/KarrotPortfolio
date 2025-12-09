@@ -1,0 +1,78 @@
+{
+  "originHash" : "78dc092ece8cab3383426fa4d4e18cdb15ab6cb13824d97b4f995c743ef6c48a",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire",
+      "state" : {
+        "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
+        "version" : "5.10.2"
+      }
+    },
+    {
+      "identity" : "differencekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ra1028/DifferenceKit.git",
+      "state" : {
+        "revision" : "073b9671ce2b9b5b96398611427a1f929927e428",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "flexlayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/layoutBox/FlexLayout",
+      "state" : {
+        "revision" : "45b4e7cbcc9f35c05112860f4eb897aae4f5011c",
+        "version" : "2.2.2"
+      }
+    },
+    {
+      "identity" : "karrotlistkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daangn/KarrotListKit",
+      "state" : {
+        "revision" : "d608169605ec440000267ea05fe71787f0b08bf0",
+        "version" : "4.7.0"
+      }
+    },
+    {
+      "identity" : "pinlayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/layoutBox/PinLayout",
+      "state" : {
+        "revision" : "72f5300042618340df21500f6c4ce71bb78b93e1",
+        "version" : "1.10.6"
+      }
+    },
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift.git",
+      "state" : {
+        "revision" : "5004a18539bd68905c5939aa893075f578f4f03d",
+        "version" : "6.9.1"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
+      "state" : {
+        "revision" : "4799286537280063c85a32f09884cfbca301b1a1",
+        "version" : "602.0.0"
+      }
+    },
+    {
+      "identity" : "yoga",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/facebook/yoga.git",
+      "state" : {
+        "revision" : "042f5013152eb81c1552dec945b88f7b95ca350f",
+        "version" : "3.2.1"
+      }
+    }
+  ],
+  "version" : 3
+}
