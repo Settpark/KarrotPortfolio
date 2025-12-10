@@ -24,6 +24,7 @@ final class HomeItemView: UIView {
     private let rootFlexContainer = UIView()
     private let subFlexContainer = UIView()
     private let subTitleFlexContainer = UIView()
+    private let subInfoFlexContainer = UIView()
     private var disposeBag: DisposeBag = .init()
     
     private let thumbnailImage: UIImageView = {
@@ -73,6 +74,38 @@ final class HomeItemView: UIView {
         return label
     }()
     
+    private let priceLabel: UILabel = {
+        let label: UILabel = .init()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.textColor = .black
+        return label
+    }()
+    
+    private let likesLabel: UILabel = {
+        let label: UILabel = .init()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .systemGray3
+        return label
+    }()
+    
+    private let chatLabel: UILabel = {
+        let label: UILabel = .init()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .systemGray3
+        return label
+    }()
+    
+    private let applicantNumLabel: UILabel = {
+        let label: UILabel = .init()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .systemGray3
+        return label
+    }()
+    
     init(viewModel: Home.ItemList.ViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -107,6 +140,7 @@ final class HomeItemView: UIView {
                         subFlex.addItem(subTitleFlexContainer)
                             .direction(.row)
                             .justifyContent(.start)
+                            .marginBottom(10)
                             .define { subTitleFlex in
                                 subTitleFlex.addItem(distanceLabel)
                                     .marginHorizontal(2.5)
@@ -115,6 +149,21 @@ final class HomeItemView: UIView {
                                 subTitleFlex.addItem(registTimeLabel)
                                     .marginHorizontal(2.5)
                                 subTitleFlex.addItem(typeLabel)
+                                    .marginHorizontal(2.5)
+                            }
+                        subFlex.addItem(priceLabel)
+                        subFlex.addItem().grow(1)
+                        
+                        subFlex.addItem(subInfoFlexContainer)
+                            .direction(.row)
+                            .alignContent(.center)
+                            .justifyContent(.end)
+                            .define { subInfoFlex in
+                                subInfoFlex.addItem(likesLabel)
+                                    .marginHorizontal(2.5)
+                                subInfoFlex.addItem(chatLabel)
+                                    .marginHorizontal(2.5)
+                                subInfoFlex.addItem(applicantNumLabel)
                                     .marginHorizontal(2.5)
                             }
                     }
@@ -135,21 +184,29 @@ final class HomeItemView: UIView {
             }.disposed(by: disposeBag)
 
         titleLabel.text = viewModel.title
-        distanceLabel.text = viewModel.distance == nil ?
-        "" : viewModel.distance! > 1000 ?
-        String(format: "%.1fkm", viewModel.distance! / 1000) : "\(String(describing: viewModel.distance!))m"
+        distanceLabel.text = viewModel.distance
         locationLabel.text = viewModel.location
         registTimeLabel.text = viewModel.registDate
         typeLabel.text = viewModel.type
+        priceLabel.text = viewModel.price
+        likesLabel.text = String(describing: viewModel.likes)
+        chatLabel.text = String(describing: viewModel.chatNum ?? 0)
+        applicantNumLabel.text = String(describing: viewModel.applicantNum ?? 0)
         
         titleLabel.flex.markDirty()
         distanceLabel.flex.markDirty()
         locationLabel.flex.markDirty()
         registTimeLabel.flex.markDirty()
         typeLabel.flex.markDirty()
+        priceLabel.flex.markDirty()
+        likesLabel.flex.markDirty()
+        chatLabel.flex.markDirty()
+        applicantNumLabel.flex.markDirty()
         
         distanceLabel.flex.display(viewModel.distance != nil ? .flex : .none)
-        
+        likesLabel.flex.display(viewModel.likes != 0 ? .flex : .none)
+        chatLabel.flex.display(viewModel.chatNum != nil ? .flex : .none)
+        applicantNumLabel.flex.display(viewModel.applicantNum != nil ? .flex : .none)
         //MARK: 명시적으로 호출하지 않으면 이전에 사용한 뷰와 엉키는 현상이 발생함.
         self.setNeedsLayout()
     }

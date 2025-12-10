@@ -40,10 +40,10 @@ class HomePresenter: HomePresentationLogic {
             let viewModel = Home.ItemList.ViewModel(
                 type: item.type,
                 title: item.title,
-                price: item.price,
+                price: String(describing: item.price) + "원",
                 location: item.location,
-                distance: item.distance,
-                registDate: timeAgoString(fromUnixTime: item.registDate),
+                distance: convertDistanceToString(fromDistance: item.distance),
+                registDate: convertTimeToString(fromUnixTime: item.registDate),
                 image: imageObserver,
                 likes: item.likes,
                 chatNum: item.chatNum,
@@ -54,7 +54,7 @@ class HomePresenter: HomePresentationLogic {
         viewController?.displayItemList(viewModels)
     }
     
-    func timeAgoString(fromUnixTime unixTime: TimeInterval) -> String {
+    func convertTimeToString(fromUnixTime unixTime: TimeInterval) -> String {
         let currentTime = Date().timeIntervalSince1970
         let timeDifference = abs(currentTime - unixTime)
         
@@ -76,5 +76,14 @@ class HomePresenter: HomePresentationLogic {
             let days = Int(timeDifference / day)
             return "\(days)일 전"
         }
+    }
+    
+    func convertDistanceToString(fromDistance distance: Double?) -> String? {
+        guard let validDistance = distance else {
+            return nil
+        }
+        
+        return validDistance  > 1000 ?
+        String(format: "%.1fkm", validDistance / 1000) : "\(String(describing: validDistance))m"
     }
 }

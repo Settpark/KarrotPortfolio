@@ -67,9 +67,9 @@ enum Home {
             var id: UUID
             var type: String
             var title: String
-            var price: Int
+            var price: String
             var location: String
-            var distance: Double?
+            var distance: String?
             var registDate: String
             var image: Observable<UIImage>
             var likes: Int
@@ -79,9 +79,9 @@ enum Home {
             init(id: UUID = UUID(),
                  type: Home.ItemList.Response.Data.SellingType,
                  title: String,
-                 price: Int,
+                 price: String,
                  location: String,
-                 distance: Double?,
+                 distance: String?,
                  registDate: String,
                  image: Observable<UIImage>,
                  likes: Int,
