@@ -30,7 +30,7 @@ class HomePresenter: HomePresentationLogic {
             let imageObserver = imageLoader.loadImage(url: item.imageUrl)
                 .flatMap({ optionalImage -> Observable<UIImage> in
                     guard let image = optionalImage else {
-                        return Observable.error(ImageLoadManagerStub.ErrorCase.invalidData)
+                        return Observable.error(imageLoader.imageLoadError)
                     }
                     return Observable.just(image)
                 })

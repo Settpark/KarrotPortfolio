@@ -9,12 +9,14 @@ import UIKit
 import RxSwift
 
 protocol ImageLoadManagable {
+    var imageLoadError: Error { get }
     func loadImage(url: String) -> Observable<UIImage?>
 }
 
 class ImageLoadManager: ImageLoadManagable {
     
     private let session: URLSession
+    var imageLoadError: Error = ErrorCase.imageLoadError
     
     init() {
         session = URLSession.shared
@@ -22,6 +24,7 @@ class ImageLoadManager: ImageLoadManagable {
     
     enum ErrorCase: Error {
         case invalidURL
+        case imageLoadError
     }
     
     func loadImage(url: String) -> Observable<UIImage?> {
@@ -37,8 +40,10 @@ class ImageLoadManager: ImageLoadManagable {
 
 class ImageLoadManagerStub: ImageLoadManagable {
     
+    var imageLoadError: Error = ErrorCase.imageLoadError
+    
     enum ErrorCase: Error {
-        case cannotFindBundle
+        case imageLoadError
         case invalidURL
         case invalidData
     }
