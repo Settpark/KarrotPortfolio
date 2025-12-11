@@ -82,6 +82,13 @@ final class HomeItemView: UIView {
         return label
     }()
     
+    private let likesImageView: UIImageView = {
+        let imageView: UIImageView = .init(image: UIImage(systemName: "heart.fill"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .systemGray3
+        return imageView
+    }()
+    
     private let likesLabel: UILabel = {
         let label: UILabel = .init()
         label.numberOfLines = 0
@@ -90,12 +97,26 @@ final class HomeItemView: UIView {
         return label
     }()
     
+    private let chatImageView: UIImageView = {
+        let imageView: UIImageView = .init(image: UIImage(systemName: "bubble"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .systemGray3
+        return imageView
+    }()
+    
     private let chatLabel: UILabel = {
         let label: UILabel = .init()
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textColor = .systemGray3
         return label
+    }()
+    
+    private let applicantImageView: UIImageView = {
+        let imageView: UIImageView = .init(image: UIImage(systemName: "person.2.fill"))
+        imageView.tintColor = .systemGray3
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     private let applicantNumLabel: UILabel = {
@@ -159,10 +180,16 @@ final class HomeItemView: UIView {
                             .alignContent(.center)
                             .justifyContent(.end)
                             .define { subInfoFlex in
+                                subInfoFlex.addItem(likesImageView)
+                                    .marginHorizontal(1)
                                 subInfoFlex.addItem(likesLabel)
                                     .marginHorizontal(2.5)
+                                subInfoFlex.addItem(chatImageView)
+                                    .marginHorizontal(1)
                                 subInfoFlex.addItem(chatLabel)
                                     .marginHorizontal(2.5)
+                                subInfoFlex.addItem(applicantImageView)
+                                    .marginHorizontal(1)
                                 subInfoFlex.addItem(applicantNumLabel)
                                     .marginHorizontal(2.5)
                             }
@@ -199,13 +226,19 @@ final class HomeItemView: UIView {
         registTimeLabel.flex.markDirty()
         typeLabel.flex.markDirty()
         priceLabel.flex.markDirty()
+        likesImageView.flex.markDirty()
         likesLabel.flex.markDirty()
+        chatImageView.flex.markDirty()
         chatLabel.flex.markDirty()
+        applicantImageView.flex.markDirty()
         applicantNumLabel.flex.markDirty()
         
         distanceLabel.flex.display(viewModel.distance != nil ? .flex : .none)
+        likesImageView.flex.display(viewModel.likes != 0 ? .flex : .none)
         likesLabel.flex.display(viewModel.likes != 0 ? .flex : .none)
+        chatImageView.flex.display(viewModel.chatNum != nil ? .flex : .none)
         chatLabel.flex.display(viewModel.chatNum != nil ? .flex : .none)
+        applicantImageView.flex.display(viewModel.applicantNum != nil ? .flex : .none)
         applicantNumLabel.flex.display(viewModel.applicantNum != nil ? .flex : .none)
         //MARK: 명시적으로 호출하지 않으면 이전에 사용한 뷰와 엉키는 현상이 발생함.
         self.setNeedsLayout()
