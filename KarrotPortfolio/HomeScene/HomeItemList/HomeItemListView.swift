@@ -11,6 +11,7 @@ import KarrotListKit
 protocol HomeItemListViewDelegate: AnyObject {
     func resetViewModels()
     func appendViewModels()
+    func routeToDetailView()
 }
 
 final class HomeItemListView: UIView {
@@ -38,11 +39,16 @@ final class HomeItemListView: UIView {
         }
     }
     
-    private weak var itemListFetchDelegate: HomeItemListViewDelegate?
+    private weak var itemListDelegate: HomeItemListViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         defineLayout()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     
@@ -52,15 +58,15 @@ final class HomeItemListView: UIView {
     
     private func resetViewModels() {
         viewModels = []
-        itemListFetchDelegate?.resetViewModels()
+        itemListDelegate?.resetViewModels()
     }
     
     private func appendViewModels() {
-        itemListFetchDelegate?.appendViewModels()
+        itemListDelegate?.appendViewModels()
     }
     
     func setDelegate(_ delegate: HomeItemListViewDelegate) {
-        itemListFetchDelegate = delegate
+        itemListDelegate = delegate
         resetViewModels()
     }
     
@@ -68,17 +74,17 @@ final class HomeItemListView: UIView {
         self.viewModels.append(contentsOf: viewModels)
     }
     
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private func applyViewModels() {
         collectionViewAdapter.apply(
             List{
                 Section(id: "Section") {
                     for viewModel in viewModels {
-                        Cell(id: viewModel.id, component: HomeItemComponent(viewModel: viewModel))
+                        Cell(
+                            id: viewModel.id,
+                            component: HomeItemComponent(viewModel: viewModel)
+                        ).didSelect { [weak self] context in
+                            self?.itemListDelegate?.routeToDetailView()
+                        }
                     }
                 }
                 .withSectionLayout(.vertical)

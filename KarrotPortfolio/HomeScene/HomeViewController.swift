@@ -51,17 +51,6 @@ class HomeViewController: UIViewController, HomeDisplayLogic {
         router.dataStore = interactor
     }
     
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
@@ -113,5 +102,10 @@ extension HomeViewController: HomeItemListViewDelegate {
     
     func appendViewModels() {
         interactor?.fetchNextItemList()
+    }
+    
+    //MARK: Routing
+    func routeToDetailView() {
+        router?.routeToDetailView()
     }
 }

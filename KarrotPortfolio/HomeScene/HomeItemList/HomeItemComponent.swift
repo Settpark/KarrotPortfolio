@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 import KarrotListKit
 
 struct HomeItemComponent: Component {    
@@ -15,9 +14,10 @@ struct HomeItemComponent: Component {
     var viewModel: Home.ItemList.ViewModel
     
     func renderContent(coordinator: ()) -> HomeItemView {
-        HomeItemView(
+        let view = HomeItemView(
             viewModel: viewModel
         )
+        return view
     }
     
     func render(in content: HomeItemView, coordinator: ()) {
