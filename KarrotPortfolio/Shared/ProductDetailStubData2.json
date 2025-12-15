@@ -1,21 +1,19 @@
 {
     "status": "success",
     "data": {
-        "item": {
-            "productImageListURL": [
-                "https://example.com/images/switch_oled_1.jpg",
-                "https://example.com/images/switch_oled_2.jpg"
-            ],
-            "profileImage": "https://example.com/profile/user_123.jpg",
-            "registerName": "봉천동닌텐도",
-            "registerLocation": "봉천동",
-            "mannerTemperature": 37.5,
-            "productTitle": "닌텐도 스위치 OLED 팝니다",
-            "price": 380000,
-            "productCategory": "게임/취미",
-            "registedDate": 1765270565,
-            "contentText": "구매 후 사용 많이 안 했습니다. 구성품 모두 있고 생활기스 정도만 있어요. 직거래만 가능합니다.",
-            "preferedLocation": "봉천역 3번 출구 앞"
-        }
+        "productImageListURL": [
+            "https://example.com/images/switch_oled_1.jpg",
+            "https://example.com/images/switch_oled_2.jpg"
+        ],
+        "profileImageURL": "https://example.com/profile/user_123.jpg",
+        "registerName": "봉천동닌텐도",
+        "registerLocation": "봉천동",
+        "mannerTemperature": 37.5,
+        "productTitle": "닌텐도 스위치 OLED 팝니다",
+        "price": 380000,
+        "productCategory": "게임/취미",
+        "registedDate": 1765270565,
+        "contentText": "구매 후 사용 많이 안 했습니다. 구성품 모두 있고 생활기스 정도만 있어요. 직거래만 가능합니다.",
+        "preferredLocation": "봉천역 3번 출구 앞"
     }
 }

@@ -21,17 +21,22 @@ enum ProductDetail {
             var detailId: Int
         }
         struct Response: Decodable {
-            var productImageListURL: [String]
-            var profileImageURL: String
-            var registerName: String
-            var registerLocation: String
-            var mannerTemperature: Double
-            var productTitle: String
-            var price: Int
-            var productCategory: String
-            var registedDate: Int
-            var contentText: String
-            var preferedLocation: String
+            var status: String
+            var data: DetailProductItem.Response.Data
+            
+            struct Data: Decodable {
+                var productImageListURL: [String]
+                var profileImageURL: String
+                var registerName: String
+                var registerLocation: String
+                var mannerTemperature: Double
+                var productTitle: String
+                var price: Int
+                var productCategory: String
+                var registedDate: Int
+                var contentText: String
+                var preferredLocation: String
+            }
         }
         
         struct ProductDetailImageViewModel: Equatable {
@@ -44,18 +49,22 @@ enum ProductDetail {
             
             var id: UUID
             var productDetailImage: Observable<UIImage>
+            
+            init(id: UUID = UUID(), productDetailImage: Observable<UIImage>) {
+                self.id = id
+                self.productDetailImage = productDetailImage
+            }
         }
         
-        struct ViewModel: Equatable {
+        struct ProductDetailInfoViewModel: Equatable {
             static func == (
-                lhs: ProductDetail.DetailProductItem.ViewModel,
-                rhs: ProductDetail.DetailProductItem.ViewModel
+                lhs: ProductDetail.DetailProductItem.ProductDetailInfoViewModel,
+                rhs: ProductDetail.DetailProductItem.ProductDetailInfoViewModel
             ) -> Bool {
                 return lhs.id == rhs.id
             }
             
             var id: UUID
-            var productDetailImages: Observable<[UIImage]>
             var profileImage: Observable<UIImage>
             var registerName: String
             var registerLocation: String
@@ -65,7 +74,33 @@ enum ProductDetail {
             var productCategory: String
             var registedDate: String
             var contentText: String
-            var preferedLocation: String
+            var preferredLocation: String
+            
+            init(
+                id: UUID = UUID(),
+                profileImage: Observable<UIImage>,
+                registerName: String,
+                registerLocation: String,
+                mannerTemperature: String,
+                productTitle: String,
+                price: String,
+                productCategory: String,
+                registedDate: String,
+                contentText: String,
+                preferredLocation: String
+            ) {
+                self.id = id
+                self.profileImage = profileImage
+                self.registerName = registerName
+                self.registerLocation = registerLocation
+                self.mannerTemperature = mannerTemperature
+                self.productTitle = productTitle
+                self.price = price
+                self.productCategory = productCategory
+                self.registedDate = registedDate
+                self.contentText = contentText
+                self.preferredLocation = preferredLocation
+            }
         }
     }
 }

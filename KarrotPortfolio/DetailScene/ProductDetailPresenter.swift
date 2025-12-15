@@ -11,13 +11,90 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol ProductDetailPresentationLogic {
-    
+    func presentItemDetailInfo(response: ProductDetail.DetailProductItem.Response.Data)
 }
 
 class ProductDetailPresenter: ProductDetailPresentationLogic {
     weak var viewController: ProductDetailDisplayLogic?
     
     // MARK: Do something
+    func presentItemDetailInfo(response: ProductDetail.DetailProductItem.Response.Data) {
+        //TODO: response -> viewModel
+        let convertedViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel = .init(
+            profileImage: makeProfileImageObserver(imageUrl: response.profileImageURL),
+            registerName: response.registerName,
+            registerLocation: response.registerLocation,
+            mannerTemperature: String(describing: response.mannerTemperature) + "\u{2103}", //"℃"
+            productTitle: response.productTitle,
+            price: String(describing: response.price) + "원",
+            productCategory: response.productCategory,
+            registedDate: convertTimeToString(fromUnixTime: Double(response.registedDate)),
+            contentText: response.contentText,
+            preferredLocation: response.preferredLocation
+        )
+        let detailProductImages = makeDetailImagesObserver(
+            imageUrls: response.productImageListURL
+        )
+        viewController?.displayItemDetailInfo(
+            productInfoViewModel: convertedViewModel,
+            productImageListViewModel: detailProductImages
+        )
+    }
+    
+    private func makeDetailImagesObserver(
+        imageUrls: [String]
+    ) -> [ProductDetail.DetailProductItem.ProductDetailImageViewModel] {
+        let imageLoadManager = ImageLoadManagerStub()
+        var tasks: [Observable<UIImage>] = []
+        for url in imageUrls {
+            tasks.append(imageLoadManager.loadImage(url: url).flatMap{ image -> Observable<UIImage> in
+                guard let image = image else {
+                    return Observable.error(imageLoadManager.imageLoadError)
+                }
+                return Observable.just(image)
+            })
+        }
+        return tasks.map {
+            ProductDetail.DetailProductItem.ProductDetailImageViewModel(
+                productDetailImage: $0
+            )
+        }
+    }
+    
+    private func makeProfileImageObserver(imageUrl: String) -> Observable<UIImage> {
+        let imageLoadManager = ImageLoadManagerStub()
+        return imageLoadManager.loadImage(url: imageUrl).flatMap{ image -> Observable<UIImage> in
+            guard let image = image else {
+                return Observable.error(imageLoadManager.imageLoadError)
+            }
+            return Observable.just(image)
+        }
+    }
+    
+    func convertTimeToString(fromUnixTime unixTime: TimeInterval) -> String {
+        let currentTime = Date().timeIntervalSince1970
+        let timeDifference = abs(currentTime - unixTime)
+        
+        let second: TimeInterval = 1
+        let minute: TimeInterval = 60 * second
+        let hour: TimeInterval = 60 * minute
+        let day: TimeInterval = 24 * hour
+        
+        if timeDifference < minute {
+            let seconds = Int(timeDifference)
+            return "\(seconds)초 전"
+        } else if timeDifference < hour {
+            let minutes = Int(timeDifference / minute)
+            return "\(minutes)분 전"
+        } else if timeDifference < day {
+            let hours = Int(timeDifference / hour)
+            return "\(hours)시간 전"
+        } else {
+            let days = Int(timeDifference / day)
+            return "\(days)일 전"
+        }
+    }
 }

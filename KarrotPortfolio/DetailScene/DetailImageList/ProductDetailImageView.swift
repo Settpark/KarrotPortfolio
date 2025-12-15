@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FlexLayout
 import RxSwift
 
 final class ProductDetailImageView: UIView {
@@ -18,7 +19,12 @@ final class ProductDetailImageView: UIView {
     }
     
     private let rootFlexContainer: UIView = UIView()
-    private let detailImageView: UIImageView = UIImageView()
+    private let detailImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .center
+        imageView.clipsToBounds = true
+        return imageView
+    }()
     private var disposeBag: DisposeBag = .init()
     
     init(viewModel: ProductDetail.DetailProductItem.ProductDetailImageViewModel) {
@@ -35,9 +41,13 @@ final class ProductDetailImageView: UIView {
     
     private func defineLayout() {
         addSubview(rootFlexContainer)
-        rootFlexContainer.flex.define { rootFlex in
-            rootFlex.addItem(detailImageView)
-                .all(0)
+        rootFlexContainer.flex
+            .alignContent(.center)
+            .justifyContent(.center)
+            .define { rootFlex in
+                rootFlex.addItem(detailImageView)
+                    .width(100%)
+                    .height(100%)
         }
     }
     
@@ -47,12 +57,21 @@ final class ProductDetailImageView: UIView {
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] image in
                 self?.detailImageView.image = image
+                self?.detailImageView.flex.markDirty()
             }.disposed(by: disposeBag)
+        
+        setNeedsLayout()
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         rootFlexContainer.flex.sizeThatFits(
             size: CGSize(width: size.width, height: .nan)
         )
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        rootFlexContainer.pin.all()
+        rootFlexContainer.flex.layout()
     }
 }

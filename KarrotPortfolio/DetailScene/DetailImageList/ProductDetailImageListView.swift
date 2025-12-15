@@ -65,7 +65,7 @@ final class ProductDetailImageListView: UIView {
     private func applyViewModels() {
         collectionViewAdapter.apply(
             List {
-                Section(id: "Section") {
+                Section(id: "DetailImageSection") {
                     for viewModel in viewModels {
                         Cell(
                             id: viewModel.id,
@@ -73,11 +73,7 @@ final class ProductDetailImageListView: UIView {
                         )
                     }
                 }
-                .withSectionLayout(.horizontal)
-            }.onRefresh { _ in
-                
-            }.onReachEnd { _ in
-                
+                .withSectionLayout(HorizontalLayout(spacing: 0, scrollingBehavior: .paging))
             }
         )
     }

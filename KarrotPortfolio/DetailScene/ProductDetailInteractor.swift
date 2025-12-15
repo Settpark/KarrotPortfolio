@@ -11,8 +11,10 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol ProductDetailBusinessLogic {
+    func fetchDetailInfo()
 }
 
 protocol ProductDetailDataStore {
@@ -21,8 +23,19 @@ protocol ProductDetailDataStore {
 
 class ProductDetailInteractor: ProductDetailBusinessLogic, ProductDetailDataStore {
     var presenter: ProductDetailPresentationLogic?
-    var worker: ProductDetailWorker?
+    var worker: ProductDetailManagable? = ProductDetailWorkerStub()
+    private var disposeBag: DisposeBag = .init()
     //var name: String = ""
     
     // MARK: Do something
+    func fetchDetailInfo() {
+        worker?.fetchProductDetailInfo(id: 1)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] response in
+                self?.presenter?.presentItemDetailInfo(response: response.data)
+            } onError: { error in
+                
+            }.disposed(by: disposeBag)
+    }
 }

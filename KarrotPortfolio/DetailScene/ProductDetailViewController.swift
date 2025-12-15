@@ -11,9 +11,15 @@
 //
 
 import UIKit
+import RxSwift
 import FlexLayout
+import PinLayout
 
 protocol ProductDetailDisplayLogic: AnyObject {
+    func displayItemDetailInfo(
+        productInfoViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel,
+        productImageListViewModel: [ProductDetail.DetailProductItem.ProductDetailImageViewModel]
+    )
 }
 
 class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
@@ -57,6 +63,7 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        interactor?.fetchDetailInfo()
     }
     
     private func setupViews() {
@@ -67,22 +74,27 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
             .direction(.column)
             .define { rootFlex in
                 rootFlex
-                    .addItem(self.productImageListView)
+                    .addItem(productImageListView)
+                    .width(100%)
+                    .height(100%)
             }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.backgroundColor = .clear
         
         rootFlexContainer.pin
             .horizontally()
             .top()
             .bottom(view.pin.safeArea.bottom)
-        
         rootFlexContainer.flex.layout()
     }
     
     // MARK: Do something
+    func displayItemDetailInfo(
+        productInfoViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel,
+        productImageListViewModel: [ProductDetail.DetailProductItem.ProductDetailImageViewModel]
+    ) {
+        self.productImageListView.updateViewModels(productImageListViewModel)
+    }
 }
