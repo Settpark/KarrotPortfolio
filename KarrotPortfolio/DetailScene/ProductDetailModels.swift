@@ -34,6 +34,18 @@ enum ProductDetail {
             var preferedLocation: String
         }
         
+        struct ProductDetailImageViewModel: Equatable {
+            static func == (
+            lhs: ProductDetail.DetailProductItem.ProductDetailImageViewModel,
+                rhs: ProductDetail.DetailProductItem.ProductDetailImageViewModel
+            ) -> Bool {
+                return lhs.id == rhs.id
+            }
+            
+            var id: UUID
+            var productDetailImage: Observable<UIImage>
+        }
+        
         struct ViewModel: Equatable {
             static func == (
                 lhs: ProductDetail.DetailProductItem.ViewModel,

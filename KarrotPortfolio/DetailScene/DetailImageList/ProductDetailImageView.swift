@@ -10,7 +10,7 @@ import RxSwift
 
 final class ProductDetailImageView: UIView {
     
-    var viewModel: ProductDetail.DetailProductItem.ViewModel {
+    var viewModel: ProductDetail.DetailProductItem.ProductDetailImageViewModel {
         didSet {
             guard viewModel != oldValue else { return }
             applyViewModel()
@@ -21,7 +21,7 @@ final class ProductDetailImageView: UIView {
     private let detailImageView: UIImageView = UIImageView()
     private var disposeBag: DisposeBag = .init()
     
-    init(viewModel: ProductDetail.DetailProductItem.ViewModel) {
+    init(viewModel: ProductDetail.DetailProductItem.ProductDetailImageViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         defineLayout()
@@ -42,7 +42,7 @@ final class ProductDetailImageView: UIView {
     }
     
     private func applyViewModel() {
-        viewModel.image
+        viewModel.productDetailImage
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] image in
