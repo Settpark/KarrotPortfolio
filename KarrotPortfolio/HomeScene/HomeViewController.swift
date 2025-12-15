@@ -62,8 +62,6 @@ class HomeViewController: UIViewController, HomeDisplayLogic {
     // MARK: Do something
     
     private func setupViews() {
-        navigationController?.isNavigationBarHidden = true
-        
         addChild(homeHeaderViewController)
         if let headerView = homeHeaderViewController.view {
             view.addSubview(headerView)
@@ -84,6 +82,8 @@ class HomeViewController: UIViewController, HomeDisplayLogic {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        navigationController?.isNavigationBarHidden = true
         view.flex.layout()
         homeHeaderViewController.view.pin.top(self.view.safeAreaInsets.top)
         homeItemListView.pin.below(of: self.homeHeaderViewController.view)

@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import FlexLayout
 
 protocol ProductDetailDisplayLogic: AnyObject {
 }
@@ -20,6 +21,8 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     var router: (NSObjectProtocol & ProductDetailRoutingLogic & ProductDetailDataPassing)?
     
     // MARK: Object lifecycle
+    private var rootFlexContainer: UIView = UIView()
+    private var productImageListView: ProductDetailImageListView = ProductDetailImageListView()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -57,7 +60,28 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     }
     
     private func setupViews() {
-        self.view.backgroundColor = .red
+        view.backgroundColor = .white
+        
+        view.addSubview(rootFlexContainer)
+        rootFlexContainer.flex
+            .direction(.column)
+            .define { rootFlex in
+                rootFlex
+                    .addItem(self.productImageListView)
+            }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.backgroundColor = .clear
+        
+        rootFlexContainer.pin
+            .horizontally()
+            .top()
+            .bottom(view.pin.safeArea.bottom)
+        
+        rootFlexContainer.flex.layout()
     }
     
     // MARK: Do something
