@@ -1,14 +1,6 @@
-//
-//  DetailImageComponent.swift
-//  KarrotPortfolio
-//
-//  Created by temp_name on 12/12/25.
-//
-
 import Foundation
 import KarrotListKit
 
-//TODO: 컴포넌트를 여러개 생성해서, Section별로 상세정보 UI를 그려보자.
 struct ProductDetailImageComponent: Component {
     typealias ViewModel = ProductDetail.DetailProductItem.ProductDetailImageViewModel
     
@@ -25,6 +17,6 @@ struct ProductDetailImageComponent: Component {
     }
     
     var layoutMode: KarrotListKit.ContentLayoutMode {
-        return .fitContainer
+        return .flexibleHeight(estimatedHeight: 200)
     }
 }

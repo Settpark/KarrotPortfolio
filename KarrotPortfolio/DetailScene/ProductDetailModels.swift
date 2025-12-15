@@ -65,6 +65,7 @@ enum ProductDetail {
             }
             
             var id: UUID
+            var productDetailImageViewModels: [ProductDetailImageViewModel]
             var profileImage: Observable<UIImage>
             var registerName: String
             var registerLocation: String
@@ -76,8 +77,11 @@ enum ProductDetail {
             var contentText: String
             var preferredLocation: String
             
+            static var empty = Self.init()
+            
             init(
                 id: UUID = UUID(),
+                productDetailImageViewModels: [ProductDetailImageViewModel],
                 profileImage: Observable<UIImage>,
                 registerName: String,
                 registerLocation: String,
@@ -90,6 +94,7 @@ enum ProductDetail {
                 preferredLocation: String
             ) {
                 self.id = id
+                self.productDetailImageViewModels = productDetailImageViewModels
                 self.profileImage = profileImage
                 self.registerName = registerName
                 self.registerLocation = registerLocation
@@ -100,6 +105,21 @@ enum ProductDetail {
                 self.registedDate = registedDate
                 self.contentText = contentText
                 self.preferredLocation = preferredLocation
+            }
+            
+            init() {
+                self.id = UUID()
+                self.productDetailImageViewModels = []
+                self.profileImage = Observable.empty()
+                self.registerName = ""
+                self.registerLocation = ""
+                self.mannerTemperature = ""
+                self.productTitle = ""
+                self.price = ""
+                self.productCategory = ""
+                self.registedDate = ""
+                self.contentText = ""
+                self.preferredLocation = ""
             }
         }
     }

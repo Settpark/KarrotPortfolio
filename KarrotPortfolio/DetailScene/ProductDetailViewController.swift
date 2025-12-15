@@ -17,8 +17,7 @@ import PinLayout
 
 protocol ProductDetailDisplayLogic: AnyObject {
     func displayItemDetailInfo(
-        productInfoViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel,
-        productImageListViewModel: [ProductDetail.DetailProductItem.ProductDetailImageViewModel]
+        productInfoViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel
     )
 }
 
@@ -83,18 +82,14 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        rootFlexContainer.pin
-            .horizontally()
-            .top()
-            .bottom(view.pin.safeArea.bottom)
+        rootFlexContainer.pin.all()
         rootFlexContainer.flex.layout()
     }
     
     // MARK: Do something
     func displayItemDetailInfo(
-        productInfoViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel,
-        productImageListViewModel: [ProductDetail.DetailProductItem.ProductDetailImageViewModel]
+        productInfoViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel
     ) {
-        self.productImageListView.updateViewModels(productImageListViewModel)
+        self.productImageListView.updateViewModel(productInfoViewModel)
     }
 }

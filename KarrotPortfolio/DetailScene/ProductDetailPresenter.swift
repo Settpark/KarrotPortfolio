@@ -23,7 +23,12 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
     // MARK: Do something
     func presentItemDetailInfo(response: ProductDetail.DetailProductItem.Response.Data) {
         //TODO: response -> viewModel
+        let detailProductImages:
+        [ProductDetail.DetailProductItem.ProductDetailImageViewModel] = makeDetailImagesObserver(
+            imageUrls: response.productImageListURL
+        )
         let convertedViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel = .init(
+            productDetailImageViewModels: detailProductImages,
             profileImage: makeProfileImageObserver(imageUrl: response.profileImageURL),
             registerName: response.registerName,
             registerLocation: response.registerLocation,
@@ -35,12 +40,8 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
             contentText: response.contentText,
             preferredLocation: response.preferredLocation
         )
-        let detailProductImages = makeDetailImagesObserver(
-            imageUrls: response.productImageListURL
-        )
         viewController?.displayItemDetailInfo(
-            productInfoViewModel: convertedViewModel,
-            productImageListViewModel: detailProductImages
+            productInfoViewModel: convertedViewModel
         )
     }
     

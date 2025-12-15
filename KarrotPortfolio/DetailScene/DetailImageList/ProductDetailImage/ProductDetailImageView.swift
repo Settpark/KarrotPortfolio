@@ -1,17 +1,10 @@
-//
-//  DetailImageView.swift
-//  KarrotPortfolio
-//
-//  Created by temp_name on 12/12/25.
-//
-
 import UIKit
 import FlexLayout
 import RxSwift
 
 final class ProductDetailImageView: UIView {
     
-    var viewModel: ProductDetail.DetailProductItem.ProductDetailImageViewModel {
+    var viewModel: ProductDetailImageComponent.ViewModel {
         didSet {
             guard viewModel != oldValue else { return }
             applyViewModel()
@@ -27,7 +20,7 @@ final class ProductDetailImageView: UIView {
     }()
     private var disposeBag: DisposeBag = .init()
     
-    init(viewModel: ProductDetail.DetailProductItem.ProductDetailImageViewModel) {
+    init(viewModel: ProductDetailImageComponent.ViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         defineLayout()
@@ -42,12 +35,12 @@ final class ProductDetailImageView: UIView {
     private func defineLayout() {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex
-            .alignContent(.center)
+            .alignContent(.start)
             .justifyContent(.center)
             .define { rootFlex in
                 rootFlex.addItem(detailImageView)
                     .width(100%)
-                    .height(100%)
+                    .height(150)
         }
     }
     
@@ -58,9 +51,8 @@ final class ProductDetailImageView: UIView {
             .subscribe { [weak self] image in
                 self?.detailImageView.image = image
                 self?.detailImageView.flex.markDirty()
+                self?.setNeedsLayout()
             }.disposed(by: disposeBag)
-        
-        setNeedsLayout()
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {

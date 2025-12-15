@@ -26,14 +26,14 @@ final class ProductDetailImageListView: UIView {
                 sectionProvider: layoutAdapter.sectionLayout
             )
         )
-        collectionView.isPagingEnabled = true
+        collectionView.isPagingEnabled = false
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
-    private var viewModels: [ProductDetailImageComponent.ViewModel] = [] {
+    private var viewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel = .empty {
         didSet {
-            guard viewModels != oldValue else { return }
+            guard viewModel != oldValue else { return }
             applyViewModels()
         }
     }
@@ -53,27 +53,37 @@ final class ProductDetailImageListView: UIView {
         addSubview(collectionView)
     }
     
-    private func resetViewModels(_ viewModels: [ProductDetailImageComponent.ViewModel]) {
-        self.viewModels = []
-        updateViewModels(viewModels)
+    private func resetViewModels(
+        _ viewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel) {
+        updateViewModel(viewModel)
     }
     
-    func updateViewModels(_ viewModels: [ProductDetailImageComponent.ViewModel]) {
-        self.viewModels = viewModels
+    func updateViewModel(
+        _ viewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel
+    ) {
+        self.viewModel = viewModel
     }
     
+    //TODO: 섹션간의 크기조정
     private func applyViewModels() {
         collectionViewAdapter.apply(
             List {
                 Section(id: "DetailImageSection") {
-                    for viewModel in viewModels {
+                    for imageModel in viewModel.productDetailImageViewModels {
                         Cell(
-                            id: viewModel.id,
-                            component: ProductDetailImageComponent(viewModel: viewModel)
+                            id: imageModel.id,
+                            component: ProductDetailImageComponent(viewModel: imageModel)
                         )
                     }
                 }
                 .withSectionLayout(HorizontalLayout(spacing: 0, scrollingBehavior: .paging))
+                Section(id: "DetailInfoBody") {
+                    Cell(
+                        id: viewModel.id,
+                        component: ProductDetailInfoBodyComponent(viewModel: viewModel)
+                    )
+                }
+                .withSectionLayout(VerticalLayout())
             }
         )
     }
