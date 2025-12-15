@@ -12,9 +12,28 @@ final class ProductDetailInfoBodyView: UIView {
     }
     
     private let rootFlexContainer: UIView = UIView()
-    private let title: UILabel = {
+    private let profileFlexContainer: UIView = UIView()
+    private let profileImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 10
+        return imageView
+    }()
+    private let registerName: UILabel = {
         let label: UILabel = UILabel()
         return label
+    }()
+    private let registerLocation: UILabel = {
+        let label: UILabel = UILabel()
+        return label
+    }()
+    private let mannerTemperature: UILabel = {
+        let label: UILabel = UILabel()
+        return label
+    }()
+    private let mannerDescriptionButton: UIButton = {
+        let button: UIButton = .init(type: .system)
+        return button
     }()
     private var disposeBag: DisposeBag = .init()
     
@@ -37,13 +56,51 @@ final class ProductDetailInfoBodyView: UIView {
             .alignContent(.start)
             .justifyContent(.start)
             .define { rootFlex in
-                rootFlex.addItem(title)
+                rootFlex.addItem(profileFlexContainer)
+                    .direction(.row)
+                    .define { profileFlex in
+                        profileFlex.addItem(profileImage)
+                            .width(50)
+                            .height(50)
+                        profileFlex.addItem(UIView())
+                            .direction(.column)
+                            .define { profileInfoFlex in
+                                profileInfoFlex.addItem(registerName)
+                                profileInfoFlex.addItem(registerLocation)
+                            }
+                        profileFlex.addItem(UIView())
+                            .grow(1)
+                        profileFlex.addItem(UIView())
+                            .direction(.column)
+                            .define { mannerTempInfoFlex in
+                                mannerTempInfoFlex.addItem(mannerTemperature)
+                                mannerTempInfoFlex.addItem(mannerDescriptionButton)
+                            }
+                    }
         }
     }
     
     private func applyViewModel() {
-        self.title.text = viewModel.productTitle
-        title.flex.markDirty()
+        self.disposeBag = DisposeBag()
+        
+        viewModel.profileImage
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] image in
+                self?.profileImage.image = image
+                self?.profileImage.flex.markDirty()
+            } onError: { _ in
+                //TODO: 상위뷰에 에러 전달
+            }.disposed(by: disposeBag)
+        registerName.text = viewModel.registerName
+        registerLocation.text = viewModel.registerLocation
+        mannerTemperature.text = viewModel.mannerTemperature
+        
+        registerName.flex.markDirty()
+        registerLocation.flex.markDirty()
+        mannerTemperature.flex.markDirty()
+        
+        setNeedsLayout()
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
