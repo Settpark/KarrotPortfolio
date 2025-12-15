@@ -11,8 +11,52 @@
 //
 
 import UIKit
+import RxSwift
 
-class ProductDetailWorker {
-    func doSomeWork() {
+protocol ProductDetailManagable {
+    func fetchProductDetailInfo(id: Int) -> Observable<ProductDetail.DetailProductItem.Response>
+}
+
+class ProductDetailWorker: ProductDetailManagable {
+    enum ErrorCase: Error {
+        case notImplementation
+    }
+    
+    func fetchProductDetailInfo(id: Int) -> Observable<ProductDetail.DetailProductItem.Response> {
+        return Observable.error(ErrorCase.notImplementation)
+    }
+}
+
+class ProductDetailWorkerStub: ProductDetailManagable {
+    enum FileError: Error {
+        case fileNotFound
+    }
+    
+    func fetchProductDetailInfo(id: Int) -> Observable<ProductDetail.DetailProductItem.Response> {
+        return Observable.create { observer in
+            do {
+                guard let url = Bundle.main.url(forResource: "ProductDetailStubData1", withExtension: "json") else {
+                    observer.onError(FileError.fileNotFound)
+                    return Disposables.create()
+                }
+                let data = try Data(contentsOf: url)
+                guard let rawString = String(data: data, encoding: .utf8) else {
+                    fatalError("encoding error")
+                }
+
+                let fixedString = rawString.replacingOccurrences(of: "\u{00A0}", with: " ")
+                let fixedData = fixedString.data(using: .utf8)!
+                
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let model = try decoder.decode(ProductDetail.DetailProductItem.Response.self, from: fixedData)
+                
+                observer.onNext(model)
+                observer.onCompleted()
+            } catch {
+                observer.onError(error)
+            }
+            return Disposables.create()
+        }
     }
 }

@@ -16,23 +16,44 @@ import RxSwift
 enum ProductDetail {
     // MARK: Use cases
     
-    enum DetailImageItem {
+    enum DetailProductItem {
         struct Request {
+            var detailId: Int
         }
-        struct Response {
+        struct Response: Decodable {
+            var productImageListURL: [String]
+            var profileImageURL: String
+            var registerName: String
+            var registerLocation: String
+            var mannerTemperature: Double
+            var productTitle: String
+            var price: Int
+            var productCategory: String
+            var registedDate: Int
+            var contentText: String
+            var preferedLocation: String
         }
+        
         struct ViewModel: Equatable {
-            static func == (lhs: ProductDetail.DetailImageItem.ViewModel, rhs: ProductDetail.DetailImageItem.ViewModel) -> Bool {
+            static func == (
+                lhs: ProductDetail.DetailProductItem.ViewModel,
+                rhs: ProductDetail.DetailProductItem.ViewModel
+            ) -> Bool {
                 return lhs.id == rhs.id
             }
             
             var id: UUID
-            var image: Observable<UIImage>
-            
-            init(id: UUID = UUID(), image: Observable<UIImage>) {
-                self.id = id
-                self.image = image
-            }
+            var productDetailImages: Observable<[UIImage]>
+            var profileImage: Observable<UIImage>
+            var registerName: String
+            var registerLocation: String
+            var mannerTemperature: String
+            var productTitle: String
+            var price: String
+            var productCategory: String
+            var registedDate: String
+            var contentText: String
+            var preferedLocation: String
         }
     }
 }

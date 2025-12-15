@@ -10,7 +10,7 @@ import RxSwift
 
 final class ProductDetailImageView: UIView {
     
-    var viewModel: ProductDetail.DetailImageItem.ViewModel {
+    var viewModel: ProductDetail.DetailProductItem.ViewModel {
         didSet {
             guard viewModel != oldValue else { return }
             applyViewModel()
@@ -21,7 +21,7 @@ final class ProductDetailImageView: UIView {
     private let detailImageView: UIImageView = UIImageView()
     private var disposeBag: DisposeBag = .init()
     
-    init(viewModel: ProductDetail.DetailImageItem.ViewModel) {
+    init(viewModel: ProductDetail.DetailProductItem.ViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         defineLayout()

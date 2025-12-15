@@ -1,0 +1,23 @@
+{
+    "status": "success",
+    "data": {
+        "item": {
+            "productImageListURL": [
+                "https://example.com/images/iphone13_1.jpg",
+                "https://example.com/images/iphone13_2.jpg",
+                "https://example.com/images/iphone13_3.jpg"
+            ],
+            "profileImage": "https://example.com/profile/user_456.jpg",
+            "registerName": "신림동아이폰",
+            "registerLocation": "신림동",
+            "mannerTemperature": 41.2,
+            "productTitle": "아이폰 13 프로 128GB 그래파이트",
+            "price": 650000,
+            "productCategory": "디지털기기",
+            "registedDate": 1765200000,
+            "contentText": "케이스와 필름 항상 착용해서 외관 상태 좋습니다. 배터리 성능 88%, 박스와 정품 충전기 포함입니다.",
+            "preferedLocation": "신림역 4번 출구 스타벅스 앞"
+        }
+    }
+}
+

@@ -69,7 +69,7 @@ class HomeworkerStub: HomeWorkerManagable {
         
         return Observable.create { observer in
             do {
-                guard let url = Bundle.main.url(forResource: "stubData", withExtension: "json") else {
+                guard let url = Bundle.main.url(forResource: "HomelistStubData", withExtension: "json") else {
                     observer.onError(FileError.fileNotFound)
                     return Disposables.create()
                 }

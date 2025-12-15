@@ -9,9 +9,9 @@ import Foundation
 import KarrotListKit
 
 struct ProductDetailImageComponent: Component {
-    typealias ViewModel = ProductDetail.DetailImageItem.ViewModel
+    typealias ViewModel = ProductDetail.DetailProductItem.ViewModel
     
-    var viewModel: ProductDetail.DetailImageItem.ViewModel
+    var viewModel: ProductDetail.DetailProductItem.ViewModel
     
     func renderContent(coordinator: ()) -> ProductDetailImageView {
         ProductDetailImageView(
