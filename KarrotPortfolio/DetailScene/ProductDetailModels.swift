@@ -36,6 +36,13 @@ enum ProductDetail {
                 var registedDate: Int
                 var contentText: String
                 var preferredLocation: String
+                var similarProducts: [SimilarProduct]
+            }
+            
+            struct SimilarProduct: Decodable {
+                var productImageURL: String
+                var productImageTitle: String
+                var productPrice: Int
             }
         }
         
@@ -76,6 +83,7 @@ enum ProductDetail {
             var registedDate: String
             var contentText: String
             var preferredLocation: String
+            var similarProducts: [SimilarProductViewModel]
             
             static var empty = Self.init()
             
@@ -91,7 +99,8 @@ enum ProductDetail {
                 productCategory: String,
                 registedDate: String,
                 contentText: String,
-                preferredLocation: String
+                preferredLocation: String,
+                similarProducts: [SimilarProductViewModel]
             ) {
                 self.id = id
                 self.productDetailImageViewModels = productDetailImageViewModels
@@ -105,6 +114,7 @@ enum ProductDetail {
                 self.registedDate = registedDate
                 self.contentText = contentText
                 self.preferredLocation = preferredLocation
+                self.similarProducts = similarProducts
             }
             
             init() {
@@ -120,6 +130,33 @@ enum ProductDetail {
                 self.registedDate = ""
                 self.contentText = ""
                 self.preferredLocation = ""
+                self.similarProducts = []
+            }
+        }
+        
+        struct SimilarProductViewModel: Equatable {
+            static func == (
+                lhs: ProductDetail.DetailProductItem.SimilarProductViewModel,
+                rhs: ProductDetail.DetailProductItem.SimilarProductViewModel
+            ) -> Bool {
+                return lhs.id == rhs.id
+            }
+            
+            var id: UUID
+            var productImageURL: Observable<UIImage>
+            var productTitle: String
+            var productPrice: String
+            
+            init(
+                id: UUID = UUID(),
+                productImageURL: Observable<UIImage>,
+                productTitle: String,
+                productPrice: String
+            ) {
+                self.id = id
+                self.productImageURL = productImageURL
+                self.productTitle = productTitle
+                self.productPrice = productPrice
             }
         }
     }

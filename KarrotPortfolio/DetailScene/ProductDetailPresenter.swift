@@ -24,12 +24,12 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
     func presentItemDetailInfo(response: ProductDetail.DetailProductItem.Response.Data) {
         //TODO: response -> viewModel
         let detailProductImages:
-        [ProductDetail.DetailProductItem.ProductDetailImageViewModel] = makeDetailImagesObserver(
+        [ProductDetail.DetailProductItem.ProductDetailImageViewModel] = makeImageObservers(
             imageUrls: response.productImageListURL
         )
         let convertedViewModel: ProductDetail.DetailProductItem.ProductDetailInfoViewModel = .init(
             productDetailImageViewModels: detailProductImages,
-            profileImage: makeProfileImageObserver(imageUrl: response.profileImageURL),
+            profileImage: makeImageObserver(imageUrl: response.profileImageURL),
             registerName: response.registerName,
             registerLocation: response.registerLocation,
             mannerTemperature: String(describing: response.mannerTemperature) + "\u{2103}", //"℃"
@@ -38,14 +38,20 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
             productCategory: response.productCategory,
             registedDate: convertTimeToString(fromUnixTime: Double(response.registedDate)),
             contentText: response.contentText,
-            preferredLocation: response.preferredLocation
+            preferredLocation: response.preferredLocation,
+            similarProducts: response.similarProducts.map({
+                .init(
+                    productImageURL: self.makeImageObserver(imageUrl: $0.productImageURL),
+                    productTitle: $0.productImageTitle,
+                    productPrice: String(describing: $0.productPrice) + "원")
+            })
         )
         viewController?.displayItemDetailInfo(
             productInfoViewModel: convertedViewModel
         )
     }
     
-    private func makeDetailImagesObserver(
+    private func makeImageObservers(
         imageUrls: [String]
     ) -> [ProductDetail.DetailProductItem.ProductDetailImageViewModel] {
         let imageLoadManager = ImageLoadManagerStub()
@@ -65,7 +71,7 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
         }
     }
     
-    private func makeProfileImageObserver(imageUrl: String) -> Observable<UIImage> {
+    private func makeImageObserver(imageUrl: String) -> Observable<UIImage> {
         let imageLoadManager = ImageLoadManagerStub()
         return imageLoadManager.loadImage(url: imageUrl).flatMap{ image -> Observable<UIImage> in
             guard let image = image else {

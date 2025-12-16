@@ -65,7 +65,7 @@ final class ProductDetailImageListView: UIView {
         self.viewModel = viewModel
     }
     
-    //TODO: 섹션간의 크기조정
+    //TODO: 섹션간의 크기조정 -> marginLayout 등
     private func applyViewModels() {
         collectionViewAdapter.apply(
             List {
@@ -85,6 +85,20 @@ final class ProductDetailImageListView: UIView {
                     )
                 }
                 .withSectionLayout(VerticalLayout())
+                Section(id: "SimilarProducts") {
+                    for similarProduct in viewModel.similarProducts {
+                        Cell(
+                            id: similarProduct.id,
+                            component: SimilarProductComponent(viewModel: similarProduct)
+                        )
+                    }
+                }.withSectionLayout(
+                    VerticalGridLayout(
+                        numberOfItemsInRow: 2,
+                        itemSpacing: 10,
+                        lineSpacing: 10
+                    )
+                )
             }
         )
     }

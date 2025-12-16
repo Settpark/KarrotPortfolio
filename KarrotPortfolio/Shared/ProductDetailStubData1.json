@@ -6,7 +6,7 @@
             "detailImage2",
             "detailImage3"
         ],
-        "profileImageURL": "detailImage1.jpg",
+        "profileImageURL": "image_5",
         "registerName": "신림동아이폰",
         "registerLocation": "신림동",
         "mannerTemperature": 41.2,
@@ -15,8 +15,28 @@
         "productCategory": "디지털기기",
         "registedDate": 1765200000,
         "contentText": "케이스와 필름 항상 착용해서 외관 상태 좋습니다. 배터리 성능 88%, 박스와 정품 충전기 포함입니다.",
-        "preferredLocation": "신림역 4번 출구 스타벅스 앞"
+        "preferredLocation": "신림역 4번 출구 스타벅스 앞",
+        "similarProducts": [
+            {
+                "productImageURL": "image_4",
+                "productImageTitle": "아이폰 13 프로 256GB 실버",
+                "productPrice": 550000
+            },
+            {
+                "productImageURL": "image_3",
+                "productImageTitle": "아이폰 13 미니 128GB 블루",
+                "productPrice": 250000
+            },
+            {
+                "productImageURL": "image_2",
+                "productImageTitle": "아이폰 12 프로 128GB 그래파이트",
+                "productPrice": 300000
+            },
+            {
+                "productImageURL": "image_1",
+                "productImageTitle": "닌텐도 스위치2",
+                "productPrice": 550000
+            }
+        ]
     }
-    
 }
-
