@@ -1,3 +1,10 @@
+//
+//  ProductDetailImageView.swift
+//  KarrotPortfolio
+//
+//  Created by temp_name on 12/12/25.
+//
+
 import UIKit
 import FlexLayout
 import RxSwift
@@ -40,7 +47,7 @@ final class ProductDetailImageView: UIView {
             .define { rootFlex in
                 rootFlex.addItem(detailImageView)
                     .width(100%)
-                    .height(150)
+                    .height(UIApplication.screenWidth)
         }
     }
     

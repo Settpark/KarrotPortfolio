@@ -17,6 +17,6 @@ struct ProductDetailInfoBodyComponent: Component {
     }
     
     var layoutMode: KarrotListKit.ContentLayoutMode {
-        return .flexibleHeight(estimatedHeight: 350)
+        return .flexibleHeight(estimatedHeight: 500)
     }
 }

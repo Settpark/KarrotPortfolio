@@ -28,6 +28,7 @@ final class ProductDetailImageListView: UIView {
         )
         collectionView.isPagingEnabled = false
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInsetAdjustmentBehavior = .never
         return collectionView
     }()
     

@@ -1,5 +1,13 @@
+//
+//  ProductDetailImageComponent.swift
+//  KarrotPortfolio
+//
+//  Created by temp_name on 12/12/25.
+//
+
 import Foundation
 import KarrotListKit
+import UIKit
 
 struct ProductDetailImageComponent: Component {
     typealias ViewModel = ProductDetail.DetailProductItem.ProductDetailImageViewModel
@@ -17,6 +25,6 @@ struct ProductDetailImageComponent: Component {
     }
     
     var layoutMode: KarrotListKit.ContentLayoutMode {
-        return .flexibleHeight(estimatedHeight: 200)
+        return .flexibleHeight(estimatedHeight: UIApplication.screenWidth)
     }
 }
