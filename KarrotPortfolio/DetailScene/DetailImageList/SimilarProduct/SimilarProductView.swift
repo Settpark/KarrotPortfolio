@@ -14,14 +14,18 @@ final class SimilarProductView: UIView {
     private let rootFlexContainer: UIView = UIView()
     private let productImage: UIImageView = {
         let imageView: UIImageView = UIImageView()
+        imageView.layer.cornerRadius = 8
+        imageView.clipsToBounds = true
         return imageView
     }()
     private let productTitle: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
     private let productPrice: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
@@ -43,9 +47,9 @@ final class SimilarProductView: UIView {
         addSubview(rootFlexContainer)
         rootFlexContainer.flex
             .direction(.column)
+            .padding(8)
             .define { rootFlex in
                 rootFlex.addItem(self.productImage)
-                    .width(100%)
                     .height(UIApplication.screenWidth / 2 - 10)
                 rootFlex.addItem(self.productTitle)
                 rootFlex.addItem(self.productPrice)

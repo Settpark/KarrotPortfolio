@@ -95,8 +95,8 @@ final class ProductDetailImageListView: UIView {
                 }.withSectionLayout(
                     VerticalGridLayout(
                         numberOfItemsInRow: 2,
-                        itemSpacing: 10,
-                        lineSpacing: 10
+                        itemSpacing: 0,
+                        lineSpacing: 5
                     )
                 )
             }
