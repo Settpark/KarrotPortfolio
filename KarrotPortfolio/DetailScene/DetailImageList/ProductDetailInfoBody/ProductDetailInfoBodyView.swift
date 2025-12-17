@@ -16,7 +16,8 @@ final class ProductDetailInfoBodyView: UIView {
     private let profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 10
+        imageView.layer.cornerRadius = 25
+        imageView.clipsToBounds = true
         return imageView
     }()
     private let registerName: UILabel = {
