@@ -18,6 +18,6 @@ struct SimilarProductComponent: Component {
     }
     
     var layoutMode: KarrotListKit.ContentLayoutMode {
-        return .flexibleHeight(estimatedHeight: UIApplication.screenWidth / 2 - 10)
+        return .flexibleHeight(estimatedHeight: 500)
     }
 }

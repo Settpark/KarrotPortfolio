@@ -91,7 +91,7 @@ final class ProductDetailInfoBodyView: UIView {
             .direction(.column)
             .alignContent(.start)
             .justifyContent(.start)
-            .margin(16)
+            .padding(16)
             .define { rootFlex in
                 rootFlex.addItem(profileFlexContainer)
                     .direction(.row)
@@ -118,19 +118,18 @@ final class ProductDetailInfoBodyView: UIView {
                             }
                     }
                 rootFlex.addItem(productTitle)
-                    .marginVertical(5)
+                    .paddingVertical(5)
                 rootFlex.addItem(productPrice)
-                    .marginVertical(5)
+                    .paddingVertical(5)
                 rootFlex.addItem(UIView())
                     .direction(.row)
-                    .marginBottom(15)
                     .define { categoryFlex in
                         categoryFlex.addItem(categoryButton)
                             .padding(5)
                         categoryFlex.addItem(registTime)
                     }
                 rootFlex.addItem(contentLabel)
-                    .marginVertical(16)
+                    .paddingVertical(16)
                 rootFlex.addItem(preferredLocation)
         }
     }
@@ -144,6 +143,7 @@ final class ProductDetailInfoBodyView: UIView {
             .subscribe { [weak self] image in
                 self?.profileImage.image = image
                 self?.profileImage.flex.markDirty()
+                self?.setNeedsLayout()
             } onError: { _ in
                 //TODO: 상위뷰에 에러 전달
             }.disposed(by: disposeBag)

@@ -82,7 +82,12 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        rootFlexContainer.pin.all()
+        rootFlexContainer.pin
+            .top()
+            .left()
+            .right()
+            .bottom(view.safeAreaInsets.bottom)
+        
         rootFlexContainer.flex.layout()
     }
     
