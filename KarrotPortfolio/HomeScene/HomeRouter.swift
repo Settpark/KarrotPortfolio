@@ -27,6 +27,7 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
     // MARK: Routing
     func routeToDetailView() {
         let destinationViewController: ProductDetailViewController = .init()
+        destinationViewController.hidesBottomBarWhenPushed = true
         let destinationDataStore: ProductDetailDataStore = destinationViewController.router!.dataStore!
         passDataToDetailView(destination: destinationDataStore)
         navigateToDetailView(destination: destinationViewController)

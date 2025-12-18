@@ -29,6 +29,20 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     private var rootFlexContainer: UIView = UIView()
     private var productImageListView: ProductDetailImageListView = ProductDetailImageListView()
     
+    private let likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(.init(systemName: "heart"), for: .normal)
+        return button
+    }()
+    private let chatButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .systemOrange
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("채팅하기", for: .normal)
+        return button
+    }()
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -75,7 +89,27 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
                 rootFlex
                     .addItem(productImageListView)
                     .width(100%)
-                    .height(100%)
+                    .grow(9.2)
+                    .basis(0)
+                
+                rootFlex
+                    .addItem(UIView())
+                    .direction(.row)
+                    .alignItems(.center)
+                    .justifyContent(.center)
+                    .width(100%)
+                    .grow(0.8)
+                    .basis(0)
+                    .define { chatFlexView in
+                        chatFlexView.addItem(likeButton)
+                            .width(10%)
+                            .aspectRatio(1)
+                            .marginRight(8)
+                        chatFlexView.addItem(chatButton)
+                            .width(80%)
+                            .height(50)
+                            .padding(16)
+                    }
             }
     }
     
